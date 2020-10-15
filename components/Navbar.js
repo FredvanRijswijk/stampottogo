@@ -5,9 +5,6 @@ import DocLink from "./DocLink"
 
 const Navbar = ({ menuLinks = [] }) => (
     <header className="site-header">
-        <NextLink href="/">
-      <a><div className="logo">AttiqLab</div></a>
-    </NextLink>
       <Links menuLinks={menuLinks} />
     </header>
 );
