@@ -1,0 +1,48 @@
+{
+  "type": "Slice",
+  "fieldset": "FlatContent Template",
+  "description": "Template model for FlatContent",
+  "icon": "thumb_up",
+  "display": "list",
+  "non-repeat": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Title",
+        "placeholder": "This is where it all begins...",
+        "single": "heading1"
+      }
+    },
+    "subtitle_headline": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Subtitle headline",
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl"
+      }
+    }
+  },
+  "repeat": {
+    "optional_icon": {
+      "type": "Image",
+      "config": {
+        "label": "Optional Icon",
+        "constraint": {},
+        "thumbnails": []
+      }
+    },
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "label": "title",
+        "single": "heading3"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "label": "description",
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl"
+      }
+    }
+  }
+}

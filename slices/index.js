@@ -1,0 +1,1 @@
+export { default as FlatContent } from './FlatContent'

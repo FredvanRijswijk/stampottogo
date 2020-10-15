@@ -1,0 +1,12 @@
+{
+  "slice_type": "flat_content",
+  "slice_label": "",
+  "items": [{}],
+  "primary": {
+    "title": [{
+      "type": "heading1",
+      "text": "Template for FlatContent slice",
+      "spans": []
+    }]
+  }
+}

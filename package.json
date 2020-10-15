@@ -1,0 +1,31 @@
+{
+  "name": "attiqweb-slices",
+  "version": "0.5.0",
+  "private": true,
+  "description": "AttiqLab website prismic with nextjs",
+  "author": {
+    "name": "Fred van Rijswijk",
+    "email": "fred@attiqlab.com"
+  },
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@emotion/core": "^10.0.27",
+    "@emotion/styled": "^10.0.27",
+    "emotion-theming": "^10.0.27",
+    "essential-slices": "^0.0.11",
+    "next": "^9.5.5",
+    "next-seo": "^4.11.0",
+    "next-slicezone": "^0.0.9",
+    "next-transpile-modules": "^4.1.0",
+    "prismic-javascript": "^3.0.2",
+    "prismic-reactjs": "^1.3.3",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-slick": "^0.27.11",
+    "theme-ui": "^0.3.1"
+  }
+}

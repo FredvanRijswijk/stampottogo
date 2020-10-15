@@ -1,0 +1,111 @@
+import React from "react";
+import NextApp from "next/app";
+
+import { theme } from "essential-slices";
+
+import { ThemeProvider, BaseStyles } from "theme-ui";
+import { Client } from "../prismic";
+
+import Head from "next/head";
+
+const customTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    primary: "black",
+    text: "orange",
+  },
+  container: {
+    ...theme.container,
+    slice: {
+      bg: "primary",
+    },
+    eyebrow: {
+      color: "tomato",
+    },
+    item: {
+      background: "#FFF",
+      border: "1px solid #111",
+      padding: "12px",
+    },
+  },
+};
+
+export function reportWebVitals({ id, name, label, value }) {
+  window.dataLayer = window.dataLayer || [];
+  window.dataLayer.push({
+    event: "reportWebVitals",
+    event_category:
+      label === "web-vital" ? "Web Vitals" : "Next.js custom metric",
+    value: Math.round(name === "CLS" ? value * 1000 : value), // values must be integers
+    event_label: id, // id unique to current page load
+    action: name,
+    non_interaction: true, // avoids affecting bounce rate.
+  });
+}
+
+export default class App extends NextApp {
+  static async getInitialProps(appCtx) {
+    const client = Client();
+    const menu = (await client.getSingle("menu")) || {};
+    return {
+      props: {
+        menu: menu,
+      },
+    };
+  }
+
+  // static async getInitialProps({ Component, ctx }) {
+  //   let pageProps = {}
+
+  //   if (Component.getInitialProps) {
+  //     pageProps = await Component.getInitialProps(ctx)
+  //   }
+
+  //   return { pageProps }
+  // }
+
+  render() {
+    const { Component, pageProps, props } = this.props;
+
+    console.log(pageProps);
+    console.log(props);
+    return (
+      <>
+        <Head>
+          <meta
+            name="viewport"
+            content="width=device-width, initial-scale=1, maximum-scale=5"
+          ></meta>
+          <title>AttiqLab</title>
+          <meta charSet="utf-8" />
+          <link
+            href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900"
+            rel="stylesheet"
+          />
+          <link rel="icon" href="/favicon.png" type="image/png" />
+          <link rel="shortcut icon" href="/favicon.ico" />
+          <link rel="preload" as="image" href="https://prismic-io.s3.amazonaws.com/attiqweb-slices/0fffd5d7-c328-4df2-b957-e2893ec260ec_attiqlab-logo.svg" />
+          <meta name="msapplication-TileColor" content="#000000" />
+          <meta name="msapplication-config" content="browserconfig.xml" />
+          <meta name="theme-color" content="#000" />
+
+          <base href="/"></base>
+
+          <link rel="preconnect" href="https://www.google.com" />
+          <link rel="preconnect" href="https://www.google.nl" />
+          <link rel="preconnect" href="https://cdn.ampproject.org" />
+          <link rel="preconnect" href="https://www.google-analytics.com" />
+          <link rel="dns-prefetch" href="https://analytics.google.com" />
+          <link rel="preconnect" href="https://stats.g.doubleclick.net" />
+          <link rel="preconnect" href="https://www.googletagmanager.com" />
+        </Head>
+        <ThemeProvider theme={theme}>
+          <BaseStyles>
+            <Component {...pageProps} menu={props.menu} />
+          </BaseStyles>
+        </ThemeProvider>
+      </>
+    );
+  }
+}

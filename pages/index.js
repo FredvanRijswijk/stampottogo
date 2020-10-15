@@ -1,0 +1,55 @@
+import { Client } from "../prismic";
+import SliceZone from "next-slicezone";
+import { useGetStaticProps } from "next-slicezone/hooks";
+
+import { NextSeo } from "next-seo";
+
+import resolver from "../sm-resolver.js";
+
+import Layout from "./../components/Layout";
+import Head from "next/head";
+
+const HomePage = (props) => {
+  const {meta_title='', meta_description=''} = props.data || {};
+  return (
+    <>
+    <Head>
+    <script
+            dangerouslySetInnerHTML={{
+              __html: `
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                'event': 'Pageview',
+                'pagePath': '/',
+                'pageTitle': '${meta_title}'
+              });`,
+            }}
+          ></script>
+    </Head>
+      <NextSeo
+        title={meta_title}
+        description={meta_description}
+        canonical={`https://www.attiqlab.com/`}
+      />
+      <Layout menu={props.menu}>
+        <SliceZone {...props} resolver={resolver} />
+      </Layout>
+    </>
+  );
+};
+
+// Fetch content from prismic
+export const getStaticProps = useGetStaticProps({
+  client: Client(),
+  queryType: "single",
+  type: "homepage"
+});
+
+// export const getStaticPaths = useGetStaticPaths({
+//   client: Client(),
+//   type: "page",
+//   fallback: true, // process.env.NODE_ENV === 'development',
+//   formatPath: () => "/",
+// });
+
+export default HomePage;
