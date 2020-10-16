@@ -77,12 +77,8 @@ export default class App extends NextApp {
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=5"
           ></meta>
-          <title>AttiqLab</title>
+          <title>STAMPOT to go</title>
           <meta charSet="utf-8" />
-          <link
-            href="https://fonts.googleapis.com/css?family=Lato:300,400,700,900"
-            rel="stylesheet"
-          />
           <link rel="icon" href="/favicon.png" type="image/png" />
           <link rel="shortcut icon" href="/favicon.ico" />
           <link rel="preload" as="image" href="https://prismic-io.s3.amazonaws.com/attiqweb-slices/0fffd5d7-c328-4df2-b957-e2893ec260ec_attiqlab-logo.svg" />

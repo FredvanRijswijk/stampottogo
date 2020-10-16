@@ -29,7 +29,7 @@ const HomePage = (props) => {
       <NextSeo
         title={meta_title}
         description={meta_description}
-        canonical={`https://www.attiqlab.com/`}
+        canonical={`https://www.stamppottogo.nl/`}
       />
       <Layout menu={props.menu}>
         <SliceZone {...props} resolver={resolver} />
