@@ -1,7 +1,7 @@
 [
     {
       "name": "Boerenkool",
-      "description": "Yummy yellow fruit",
+      "description": "Borenkool beschrijving",
       "sku": "prod_ICz9VWngCj7Cz9",
       "price": 699,
       "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
@@ -10,6 +10,7 @@
     },
     {
       "name": "Zuurkool",
+      "description": "Zuurkool beschrijving",
       "sku": "prod_IDctJ5pTwUq3Ud",
       "price": 899,
       "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
