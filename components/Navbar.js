@@ -2,6 +2,8 @@ import React from "react";
 import { default as NextLink } from 'next/link'
 import { RichText } from 'prismic-reactjs'
 import DocLink from "./DocLink"
+import Cart from "./Cart";
+import CartNavBar from "./CartNavBar";
 
 const Navbar = ({ menuLinks = [] }) => (
     <header className="site-header">
@@ -21,9 +23,18 @@ const Links = ({menuLinks}) => {
               </DocLink>
             </li>
           ))}
-          <li> <NextLink href="/contact">
+          <li> <NextLink href="/bestel">
+                Bestel
+              </NextLink></li>
+              <li> <NextLink href="/contact">
                 Contact
               </NextLink></li>
+
+              <li>
+                <Cart>
+                  <CartNavBar />
+                </Cart>
+              </li>
         </ul>
       </nav>
     )

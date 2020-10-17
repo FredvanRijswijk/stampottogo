@@ -9,6 +9,9 @@ import resolver from "../sm-resolver.js";
 import Layout from "./../components/Layout";
 import Head from "next/head";
 
+import Cart from '../components/Cart'
+import CartSummary from '../components/CartSummary'
+
 const HomePage = (props) => {
   const {meta_title='', meta_description=''} = props.data || {};
   return (

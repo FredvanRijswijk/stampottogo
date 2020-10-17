@@ -9,8 +9,21 @@ import ClearCart from '../components/ClearCart'
 import { fetchGetJSON } from '../utils/api-helpers'
 import useSWR from 'swr'
 
+import Confetti from "react-confetti"
+import { useState, useEffect } from "react"
+
 const ResultPage: NextPage = () => {
   const router = useRouter()
+
+  const [width, setWidth] = useState(0);
+  const [height, setHeight] = useState(0);
+
+  useEffect(() => {
+    setTimeout(() => {
+      setWidth(window.innerWidth);
+      setHeight(window.innerHeight);
+    }, 100);
+  });
 
   // Fetch CheckoutSession from static page via
   // https://nextjs.org/docs/basic-features/data-fetching#static-generation
@@ -26,6 +39,7 @@ const ResultPage: NextPage = () => {
   return (
     <Layout menu="">
       <div className="page-container">
+      <Confetti width={width} height={height} numberOfPieces={450} />
         <h1>Checkout Payment Result</h1>
         <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
         <h3>CheckoutSession response:</h3>
