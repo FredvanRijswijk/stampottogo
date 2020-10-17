@@ -4,7 +4,7 @@
       "description": "Yummy yellow fruit",
       "sku": "prod_ICz9VWngCj7Cz9",
       "price": 699,
-      "image": "https://www.stampottogo.nl/static/images.no-picture.jpg",
+      "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
       "attribution": "Boerenkool",
       "currency": "eur"
     },
@@ -12,7 +12,7 @@
       "name": "Zuurkool",
       "sku": "prod_IDctJ5pTwUq3Ud",
       "price": 899,
-      "image": "https://www.stampottogo.nl/static/images.no-picture.jpg",
+      "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
       "attribution": "Zuurkool",
       "currency": "eur"
     }
