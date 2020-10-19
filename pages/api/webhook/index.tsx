@@ -52,6 +52,10 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     } else if (event.type === 'charge.succeeded') {
       const charge = event.data.object as Stripe.Charge
       console.log(`💵 Charge id: ${charge.id}`)
+    } 
+    else if (event.type === 'payment_intent.created') {
+      const charge = event.data.object as Stripe.PaymentIntentsResource
+      console.log(`👍🏻 Charge id: ${charge.create}`)
     } else {
       console.warn(`🤷‍♀️ Unhandled event type: ${event.type}`)
     }

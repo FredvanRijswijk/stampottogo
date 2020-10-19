@@ -1,20 +1,20 @@
 [
     {
-      "name": "Boerenkool",
-      "description": "Borenkool beschrijving",
-      "sku": "prod_ICz9VWngCj7Cz9",
+      "name": "Zuurkool",
+      "description": "Zuurkool beschrijving",
+      "sku": "prod_IDgdkFy67WDNYt",
       "price": 699,
       "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
-      "attribution": "Boerenkool",
+      "attribution": "Zuurkool",
       "currency": "eur"
     },
     {
-      "name": "Zuurkool",
-      "description": "Zuurkool beschrijving",
+      "name": "Boerenkool",
+      "description": "Boerenkool beschrijving",
       "sku": "prod_IDctJ5pTwUq3Ud",
-      "price": 899,
+      "price": 999,
       "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
-      "attribution": "Zuurkool",
+      "attribution": "Test",
       "currency": "eur"
     }
   ]

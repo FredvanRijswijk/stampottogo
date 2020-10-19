@@ -1,6 +1,7 @@
 import React from "react";
 import Head from "next/head";
 import Navbar from "./Navbar";
+import Footer from "./Footer";
 
 const Layout = ({ menu, children }) => {
   if (menu) {
@@ -20,7 +21,9 @@ const Layout = ({ menu, children }) => {
   return (
     <div>
       <main>{children}</main>
+      <Footer />
     </div>
+    
   )
   
   

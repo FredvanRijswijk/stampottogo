@@ -38,6 +38,7 @@ export default class extends Document {
           <Main />
           <NextScript />
         </body>
+        
       </Html>
     )
   }

@@ -5,6 +5,7 @@ import DocLink from "./DocLink"
 import Cart from "./Cart";
 import CartNavBar from "./CartNavBar";
 
+
 const Navbar = ({ menuLinks = [] }) => (
     <header className="site-header">
       <Links menuLinks={menuLinks} />

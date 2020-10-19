@@ -5,12 +5,20 @@ import Cart from '../components/Cart'
 import CartSummary from '../components/CartSummary'
 import Products from '../components/Products'
 
-const DonatePage: NextPage = () => {
+import { jsx, Styled } from 'theme-ui'
+
+
+const OrderPage: NextPage = () => {
+
+  const [user] = ['5211']
+
   return (
     <Layout menu="">
       <div className="page-container">
-        <h1>Shopping Cart</h1>
+        <h1>Bestel</h1>
 
+        {/* {user ? <Cart><CartSummary /></Cart> : 'Geen toegang tot bestellen'} */}
+      
         <Cart>
           <CartSummary />
           <Products />
@@ -20,4 +28,4 @@ const DonatePage: NextPage = () => {
   )
 }
 
-export default DonatePage
+export default OrderPage

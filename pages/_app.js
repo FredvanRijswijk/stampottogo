@@ -3,33 +3,11 @@ import NextApp from "next/app";
 
 import { theme } from "essential-slices";
 
-import { ThemeProvider, BaseStyles } from "theme-ui";
+import { ThemeProvider, BaseStyles, jsx } from "theme-ui";
 import { Client } from "../prismic";
-
+// import theme from '../theme'
 import Head from "next/head";
 
-const customTheme = {
-  ...theme,
-  colors: {
-    ...theme.colors,
-    primary: "black",
-    text: "orange",
-  },
-  container: {
-    ...theme.container,
-    slice: {
-      bg: "primary",
-    },
-    eyebrow: {
-      color: "tomato",
-    },
-    item: {
-      background: "#FFF",
-      border: "1px solid #111",
-      padding: "12px",
-    },
-  },
-};
 
 export function reportWebVitals({ id, name, label, value }) {
   window.dataLayer = window.dataLayer || [];

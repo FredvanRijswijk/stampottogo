@@ -9,23 +9,38 @@ import { NextApiRequest, NextApiResponse } from 'next'
  * so you know the pricing information is accurate.
  */
 import { validateCartItems } from 'use-shopping-cart/src/serverUtil'
-import inventory from '../../../data/products.json'
+// import inventory from '../../../data/products.json'
+
 
 import Stripe from 'stripe'
+import useDishes from '../../../hooks/Dishes'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: '2020-08-27',
 })
 
+
+
+
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
+
+  const data  = await fetch('http://localhost:3000/api/dishes').then((res) => res.json())
+  console.log('DATA ', data);
+  
+  if (data.dishes) {
+    console.log('DATA Dishes', data.dishes);
+    
+  }
+
   if (req.method === 'POST') {
+    
     try {
       // Validate the cart details that were sent from the client.
       const cartItems = req.body
-      const line_items = validateCartItems(inventory, cartItems)
+      const line_items = validateCartItems(data.dishes, cartItems)
       // Create Checkout Sessions from body params.
       const params: Stripe.Checkout.SessionCreateParams = {
         allow_promotion_codes: true,
@@ -42,6 +57,9 @@ export default async function handler(
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
         params
       )
+
+      console.log('checkoutSession: ', checkoutSession);
+      
 
       res.status(200).json(checkoutSession)
     } catch (err) {
