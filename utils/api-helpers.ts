@@ -1,5 +1,3 @@
-import useDishes from "../hooks/Dishes";
-
 export async function fetchGetJSON(url: string) {
     try {
       const data = await fetch(url).then((res) => res.json())
@@ -9,14 +7,6 @@ export async function fetchGetJSON(url: string) {
     }
   }
 
-  const dishes  = useDishes();
-  console.log('DATA ', dishes);
-  
-  if (dishes) {
-    console.log('DATA Dishes', dishes);
-    
-  }
-  
   export async function fetchPostJSON(url: string, data?: {}) {
 
     // console.log(data);

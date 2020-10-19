@@ -13,7 +13,6 @@ import { validateCartItems } from 'use-shopping-cart/src/serverUtil'
 
 
 import Stripe from 'stripe'
-import useDishes from '../../../hooks/Dishes'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
   apiVersion: '2020-08-27',
@@ -27,7 +26,7 @@ export default async function handler(
   res: NextApiResponse
 ) {
 
-  const data  = await fetch('http://localhost:3000/api/dishes').then((res) => res.json())
+  const data  = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
   console.log('DATA ', data);
   
   if (data.dishes) {
