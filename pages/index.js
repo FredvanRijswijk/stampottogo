@@ -36,6 +36,7 @@ const HomePage = (props) => {
       />
       <Layout menu={props.menu}>
         <SliceZone {...props} resolver={resolver} />
+        <h1>HELLOOOOOOOO</h1>
       </Layout>
     </>
   );
