@@ -35,8 +35,9 @@ const HomePage = (props) => {
         canonical={`https://www.stamppottogo.nl/`}
       />
       <Layout menu={props.menu}>
+      <h1>HELLOOOOOOOO</h1>
         <SliceZone {...props} resolver={resolver} />
-        <h1>HELLOOOOOOOO</h1>
+        
       </Layout>
     </>
   );
