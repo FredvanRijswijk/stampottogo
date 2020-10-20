@@ -39,7 +39,7 @@ const ResultPage: NextPage = () => {
   return (
     <Layout menu="">
       <div className="page-container">
-      <Confetti width={width} height={height} numberOfPieces={450} />
+      {/* <Confetti width={width} height={height} numberOfPieces={450} /> */}
         <h1>Checkout Payment Result</h1>
         <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
         <h3>CheckoutSession response:</h3>
