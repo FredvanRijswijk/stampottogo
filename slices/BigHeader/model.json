@@ -1,0 +1,39 @@
+{
+  "type": "Slice",
+  "fieldset": "BigHeader Template",
+  "description": "Template model for BigHeader",
+  "icon": "thumb_up",
+  "display": "list",
+  "non-repeat": {
+    "title": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Title",
+        "placeholder": "This is where it all begins...",
+        "single": "heading1"
+      }
+    },
+    "description": {
+      "type": "StructuredText",
+      "config": {
+        "label": "Subtitle headline",
+        "multi": "paragraph, preformatted, heading1, heading2, heading3, heading4, heading5, heading6, strong, em, hyperlink, image, embed, list-item, o-list-item, rtl"
+      }
+    },
+    "link": {
+      "type": "Link",
+      "config": {
+        "label": "Button Link"
+      }
+    },
+    "image": {
+      "type": "Image",
+      "config": {
+        "constraint": {},
+        "thumbnails": [],
+        "label": "Image"
+      }
+    }
+  },
+  "repeat": {}
+}

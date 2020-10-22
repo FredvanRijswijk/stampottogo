@@ -9,11 +9,11 @@ import resolver from "../sm-resolver.js";
 import Layout from "./../components/Layout";
 import Head from "next/head";
 
-import Cart from '../components/Cart'
-import CartSummary from '../components/CartSummary'
+// import { Box, Link, Text, Card } from 'theme-ui'
 
 const HomePage = (props) => {
   const {meta_title='', meta_description=''} = props.data || {};
+
   return (
     <>
     <Head>
@@ -34,9 +34,19 @@ const HomePage = (props) => {
         description={meta_description}
         canonical={`https://www.stamppottogo.nl/`}
       />
-      <Layout menu={props.menu}>
+      <Layout menu="">
+        <img src="/static/images/no-picture.jpg" width="320" height="320" />
         <SliceZone {...props} resolver={resolver} />
       </Layout>
+      <style jsx>{`
+      img {
+        padding-top: 40px;
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      `}</style>
     </>
   );
 };

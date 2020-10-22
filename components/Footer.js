@@ -12,7 +12,7 @@ const Footer = () => {
             p: 2,
             variant: 'styles.footer',
         }}>
-        <Link to='/' sx={{ variant: 'styles.navlink', p: 2 }}>
+        {/* <Link to='/' sx={{ variant: 'styles.navlink', p: 2 }}>
             Home
         </Link>
         <Link to='/' sx={{ variant: 'styles.navlink', p: 2 }}>
@@ -20,9 +20,9 @@ const Footer = () => {
         </Link>
         <Link to='/' sx={{ variant: 'styles.navlink', p: 2 }}>
             About
-        </Link>
+        </Link> */}
         <div sx={{ mx: 'auto' }} />
-        <div sx={{ p: 2 }}>© 2019 Jane Doe</div>
+        <div sx={{ p: 2, alignItems: 'center' }}>© 2020 STAMPPOT to go</div>
         </footer>
     )
 }
