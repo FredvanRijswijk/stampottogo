@@ -23,8 +23,8 @@ const CartSummary = () => {
     setLoading(true)
 
     console.log('cartDetails:', cartDetails);
-    
 
+    
     const response = await fetchPostJSON(
       '/api/checkout_sessions/cart',
       cartDetails
@@ -45,6 +45,9 @@ const CartSummary = () => {
     <form onSubmit={handleCheckout}>
       <h2>Overzicht</h2>
       {/* This is where we'll render our cart */}
+      <p suppressHydrationWarning>
+        <strong>Aantal:</strong> {'meta'}
+      </p>
       <p suppressHydrationWarning>
         <strong>Aantal:</strong> {cartCount}
       </p>

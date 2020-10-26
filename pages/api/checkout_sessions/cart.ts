@@ -19,15 +19,14 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 
-
-
 export default async function handler(
   req: NextApiRequest,
   res: NextApiResponse
 ) {
 
   const data  = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
-  console.log('DATA ', data);
+
+  console.log('req.body ', req.body);
   
   if (data.dishes) {
     console.log('DATA Dishes', data.dishes);
@@ -52,6 +51,9 @@ export default async function handler(
         line_items,
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/bestel`,
+        // metadata: {
+
+        // }
       }
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
         params
