@@ -11,7 +11,7 @@ export const ErrorResult = ({children}) => (
   <div className="error">{children}</div>
 );
 
-// Demo hook to dynamically change font size based on window size.
+// Demo hook to dynamically change font size based on window size. util
 export const useDynamicFontSize = () => {
   const [fontSize, setFontSize] = useState(
     window.innerWidth < 450 ? '14px' : '18px'

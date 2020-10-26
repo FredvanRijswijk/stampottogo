@@ -3,11 +3,11 @@ import { NextPage } from 'next'
 import Layout from '../components/Layout'
 
 import getStripe from '../utils/get-stripe'
-import * as config from '../config'
+
 import {logEvent, Result, ErrorResult} from '../utils/util';
-import { jsx, Styled } from 'theme-ui'
+
 import { Elements, CardElement, IdealBankElement, useElements, useStripe } from '@stripe/react-stripe-js'
-import { fetchPostJSON } from '@/utils/api-helpers';
+
 import Axios from 'axios';
 import Cart from '../components/Cart'
 import { useRouter } from 'next/router';
@@ -96,7 +96,7 @@ const CheckoutForm = ({onSuccesfullCheckout}) => {
 
       const confirmedPayment = await stripe.confirmIdealPayment(pi, {
         payment_method: payload.paymentMethod.id,
-        return_url: `${process.env.NEXT_BASE_URL}/checkout`
+        return_url: 'https://staging.stamppottogo.nl/checkout'
       });
       
       setPaymentStatus(confirmedPayment.paymentIntent)
