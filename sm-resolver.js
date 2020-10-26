@@ -1,7 +1,7 @@
 import * as EssentialSlices from 'essential-slices/src/slices'
-import * as FlatContent from './slices/index'
+import * as Custom from './slices/index'
 
-const __allSlices = {  ...EssentialSlices, ...FlatContent, }
+const __allSlices = {  ...EssentialSlices, ...Custom }
 
 const NotFound = ({ sliceName }) => {
 	console.log(`[sm - resolver] component "${sliceName}" not found.`)

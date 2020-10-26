@@ -1,0 +1,12 @@
+{
+  "slice_type": "big_header",
+  "slice_label": "",
+  "items": [{}],
+  "primary": {
+    "title": [{
+      "type": "heading1",
+      "text": "Template for BigHeader slice",
+      "spans": []
+    }]
+  }
+}

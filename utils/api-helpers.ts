@@ -8,8 +8,6 @@ export async function fetchGetJSON(url: string) {
   }
 
   export async function fetchPostJSON(url: string, data?: {}) {
-
-    // console.log(data);
     
     try {
       // Default options are marked with *

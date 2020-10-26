@@ -13,10 +13,12 @@
     "start": "next start"
   },
   "dependencies": {
+    "@chakra-ui/core": "^0.8.0",
     "@emotion/core": "^10.0.27",
     "@emotion/styled": "^10.0.27",
     "@stripe/react-stripe-js": "^1.1.2",
     "@stripe/stripe-js": "^1.10.0",
+    "axios": "^0.21.0",
     "date-fns": "^2.16.1",
     "emotion-theming": "^10.0.27",
     "essential-slices": "^0.0.11",

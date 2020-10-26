@@ -46,8 +46,8 @@ export default class App extends NextApp {
   render() {
     const { Component, pageProps, props } = this.props;
 
-    console.log(pageProps);
-    console.log(props);
+    // console.log(pageProps);
+    // console.log(props);
     return (
       <>
         <Head>

@@ -39,18 +39,8 @@ const CartNavBar = () => {
     <form onSubmit={handleCheckout}>
       {/* This is where we'll render our cart */}
       <p suppressHydrationWarning>
-        <strong>Aantal:</strong> {cartCount}
+        <strong> {cartCount} </strong>
       </p>
-      <p suppressHydrationWarning>
-        <strong>Totaal:</strong> {formattedTotalPrice}
-      </p>
-      <button
-        className="cart-style-background"
-        type="submit"
-        disabled={cartEmpty || loading}
-      >
-        Afrekenen
-      </button>
     </form>
   )
 }

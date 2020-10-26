@@ -15,29 +15,141 @@ const Navbar = ({ menuLinks = [] }) => (
 const Links = ({menuLinks}) => {
   if (menuLinks) {
     return (
-      <nav>
-        <ul>
-          {menuLinks.map((menuLink, index) => (
-            <li key={`menulink-${index}`}>
-              <DocLink link={menuLink.link}>
+
+      <>
+      <nav className="f-reset"> 
+      <div className="linksnav">
+        <a href="/">test</a>
+      {menuLinks.map((menuLink, index) => (
+            
+              <DocLink key={`menulink-${index}`} link={menuLink.link} linkClass="link">
                 {RichText.asText(menuLink.label)}
               </DocLink>
-            </li>
+           
           ))}
-          <li> <NextLink href="/bestel">
+      <NextLink href="/bestel">
                 Bestel
-              </NextLink></li>
-              <li> <NextLink href="/contact">
+              </NextLink>
+              <NextLink href="/contact">
                 Contact
-              </NextLink></li>
-
-              <li>
-                <Cart>
+              </NextLink>
+              <Cart>
                   <CartNavBar />
                 </Cart>
-              </li>
-        </ul>
+      </div>
+       
       </nav>
+      
+      <style jsx>{`
+        nav {
+          background-color: #e4f9f3;
+          position: relative;
+          flex: 1;
+          height: 80px;
+          display: flex;
+          align-items: center;
+          
+        }
+
+        .linksnav {
+          width: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: space-around;
+          z-index: 1;
+        }
+
+        .linksnav a.link {
+          text-decoration: none;
+          transition: color 0.2s ease;
+          color: #000;
+        }
+
+        .linksnav a:hover.link {
+          color: #000;
+        }
+
+        .linksnav a.selected.link {
+          color: #414f6b;
+          font-weight: 600;
+        }
+
+
+        .linksnav a:first-child,
+        .linksnav a:last-child {
+          display: flex;
+        }
+
+        a.icon,
+        a.icon > :global(div.container) {
+          /* Remove additional space from SVG */
+          display: inline-flex;
+          justify-content: center;
+        }
+
+        a.icon > :global(div.container) {
+          overflow: visible;
+        }
+
+        .mobile-logo,
+        .mobile-top {
+          display: none;
+        }
+
+        .header-feedback {
+          display: inline-flex;
+        }
+
+        /* Mobile */
+
+        @media (max-width: 640px) {
+          .mobile-logo {
+            display: block;
+          }
+
+          nav {
+            height: unset;
+            flex-direction: column;
+            align-items: flex-start;
+            justify-content: flex-start;
+            padding: 1rem 0;
+          }
+
+          nav .links .logo,
+          nav .links .icon {
+            display: none;
+          }
+
+          nav .links a {
+            font-size: 14px;
+          }
+
+          .mobile-top {
+            width: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 0.5rem;
+          }
+
+          .mobile-top > .icons {
+            display: flex;
+            align-items: center;
+          }
+
+          .mobile-top > .icons a:nth-child(2) {
+            margin-left: 2rem;
+          }
+        }
+
+        @media (max-width: 950px) {
+          .header-feedback {
+            display: none;
+          }
+        }
+      `}</style>
+      
+      </>
     )
   }
   return null
