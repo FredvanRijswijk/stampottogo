@@ -34,11 +34,9 @@ const HomePage = (props) => {
         description={meta_description}
         canonical={`https://www.stamppottogo.nl/`}
       />
-      <Layout menu={props.menu}>
-      <h1>HELLOOOOOOOO</h1>
+      <Layout menu="">
         <Image src="/static/images/no-picture.jpg" width="320" height="320" />
         <SliceZone {...props} resolver={resolver} />
-        
       </Layout>
       <style jsx>{`
       img {
