@@ -3,7 +3,7 @@ import SliceZone from "next-slicezone";
 import { useGetStaticProps } from "next-slicezone/hooks";
 
 import { NextSeo } from "next-seo";
-
+import Image from 'next/image'
 import resolver from "../sm-resolver.js";
 
 import Layout from "./../components/Layout";
@@ -36,7 +36,7 @@ const HomePage = (props) => {
       />
       <Layout menu={props.menu}>
       <h1>HELLOOOOOOOO</h1>
-        <img src="/static/images/no-picture.jpg" width="320" height="320" />
+        <Image src="/static/images/no-picture.jpg" width="320" height="320" />
         <SliceZone {...props} resolver={resolver} />
         
       </Layout>

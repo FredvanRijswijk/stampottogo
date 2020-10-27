@@ -3,6 +3,7 @@ import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 // import products from '../data/products.json'
 import { Heading, Box, Button } from 'theme-ui'
 import useSwr from 'swr'
+import Image from 'next/image'
 
 const fetcher = (url) => fetch(url).then((res) => res.json())
 
@@ -20,7 +21,7 @@ const Products = () => {
     <section className="products">
       {data.dishes.map((dishes) => (
         <div key={dishes.sku} className="product">
-          <img src={dishes.image} alt={dishes.name} width="320" height="320"/>
+          <Image src={dishes.image} alt={dishes.name} width="320" height="320"/>
           <Heading as='h3'>{dishes.name}</Heading>
           <p className="price">
             {formatCurrencyString({

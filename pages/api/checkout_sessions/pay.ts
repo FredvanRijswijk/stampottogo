@@ -20,7 +20,8 @@ export default async (
             amount: 1099,
             payment_method_types: ['ideal'],
             currency: 'eur',
-            receipt_email: email
+            receipt_email: email,
+            
         })
 
         console.log(payment.client_secret);

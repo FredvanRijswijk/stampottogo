@@ -40,6 +40,29 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Successfully constructed event.
     console.log('✅ Success:', event.id)
 
+    let intent = null;
+    let paymentIntent = null;
+    let charge = null;
+    switch (event['type']) {
+      case 'payment_intent.succeeded':
+        intent = event.data.object;
+        console.log("Succeeded:", intent.id);
+        paymentIntent = event.data.object as Stripe.PaymentIntent;
+        console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
+        break;
+      case 'payment_intent.payment_failed':
+        intent = event.data.object;
+        const message = intent.last_payment_error && intent.last_payment_error.message;
+        console.log('Failed:', intent.id, message);
+        paymentIntent = event.data.object as Stripe.PaymentIntent
+      console.log(`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`)
+        break;
+      case 'payment_intent.created':
+        charge = event.data.object as Stripe.Charge;
+        console.log(`💵 Charge id: ${charge.id}`)
+        break;
+    }
+
     // Cast event data to Stripe object.
     if (event.type === 'payment_intent.succeeded') {
       const paymentIntent = event.data.object as Stripe.PaymentIntent

@@ -24,10 +24,25 @@ const CartSummary = () => {
 
     console.log('cartDetails:', cartDetails);
 
+    const da = {
+      meta: 'test',
+      oke: 'erheiu iuehr'
+    }
+
+    const cartData = JSON.stringify(cartDetails)
+
+    const mergedata = {
+      cartDetails,
+      ...da
+    }
+
+
+    console.log('MERGEDATA: :::: ', mergedata);
+    
     
     const response = await fetchPostJSON(
       '/api/checkout_sessions/cart',
-      cartDetails
+      mergedata
     )
 
     console.log('RESPONSE: ', response);

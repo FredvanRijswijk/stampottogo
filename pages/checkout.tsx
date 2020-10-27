@@ -34,7 +34,7 @@ const ELEMENT_OPTIONS = {
 };
 
 
-const CheckoutForm = ({onSuccesfullCheckout}) => {
+const CheckoutForm = () => {
   const stripe = useStripe()
   const elements = useElements();
   const [name, setName] = useState('');
@@ -164,7 +164,7 @@ const OrderPage: NextPage = () => {
         <h1>Checkout</h1>
 
         <Elements stripe={getStripe()}>
-          <CheckoutForm onSuccesfullCheckout={() => router.push('/checkout')}/>
+          <CheckoutForm />
         </Elements>
       
         
