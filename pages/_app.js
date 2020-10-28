@@ -73,6 +73,7 @@ export default class App extends NextApp {
           <link rel="dns-prefetch" href="https://analytics.google.com" />
           <link rel="preconnect" href="https://stats.g.doubleclick.net" />
           <link rel="preconnect" href="https://www.googletagmanager.com" />
+          <link rel="preload" href="/api/dishes" as="fetch" crossorigin="anonymous"></link>
         </Head>
         <ThemeProvider theme={theme}>
           <BaseStyles>
