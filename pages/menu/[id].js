@@ -3,8 +3,6 @@ import { useRouter } from 'next/router'
 
 export default function MenuItem({ item, preview }) {
     const router = useRouter()
-
-    console.log('ITEM:::::', item);
     
     if (!router.isFallback && !item?.sku) {
       return <ErrorPage statusCode={404} />
