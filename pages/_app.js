@@ -1,13 +1,23 @@
 import React from "react";
 import NextApp from "next/app";
-
-import { theme } from "essential-slices";
-
-import { ThemeProvider, BaseStyles, jsx } from "theme-ui";
-import { Client } from "../prismic";
-// import theme from '../theme'
 import Head from "next/head";
 
+import { theme } from "essential-slices";
+import "../styles/index.css"
+
+
+
+const customTheme = {
+  ...theme,
+  colors: {
+    ...theme.colors,
+    brand: {
+      900: "#1a365d",
+      800: "#153e75",
+      700: "#2a69ac",
+    },
+  },
+};
 
 export function reportWebVitals({ id, name, label, value }) {
   window.dataLayer = window.dataLayer || [];
@@ -23,15 +33,15 @@ export function reportWebVitals({ id, name, label, value }) {
 }
 
 export default class App extends NextApp {
-  static async getInitialProps(appCtx) {
-    const client = Client();
-    const menu = (await client.getSingle("menu")) || {};
-    return {
-      props: {
-        menu: menu,
-      },
-    };
-  }
+  // static async getInitialProps(appCtx) {
+  //   const client = Client();
+  //   const menu = (await client.getSingle("menu")) || {};
+  //   return {
+  //     props: {
+  //       menu: menu,
+  //     },
+  //   };
+  // }
 
   // static async getInitialProps({ Component, ctx }) {
   //   let pageProps = {}
@@ -42,6 +52,7 @@ export default class App extends NextApp {
 
   //   return { pageProps }
   // }
+
 
   render() {
     const { Component, pageProps, props } = this.props;
@@ -73,13 +84,9 @@ export default class App extends NextApp {
           <link rel="dns-prefetch" href="https://analytics.google.com" />
           <link rel="preconnect" href="https://stats.g.doubleclick.net" />
           <link rel="preconnect" href="https://www.googletagmanager.com" />
-          <link rel="preload" href="/api/dishes" as="fetch" crossorigin="anonymous"></link>
+          <link rel="preload" href="/api/dishes" as="fetch" crossOrigin="anonymous"></link>
         </Head>
-        <ThemeProvider theme={theme}>
-          <BaseStyles>
-            <Component {...pageProps} menu={props.menu} />
-          </BaseStyles>
-        </ThemeProvider>
+            <Component {...pageProps} />
       </>
     );
   }

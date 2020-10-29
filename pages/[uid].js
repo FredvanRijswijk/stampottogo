@@ -10,6 +10,7 @@ import resolver from "../sm-resolver.js";
 import Layout from "./../components/Layout";
 
 const Page = (props) => {
+  console.log(props);
   const { meta_title = "", meta_description = "" } = props.data || {};
   return (
     <>
@@ -31,7 +32,7 @@ const Page = (props) => {
         description={meta_description}
         canonical={`https://www.stamppottogo.nl/${props.uid}`}
       />
-      <Layout menu={props.menu}>
+      <Layout>
         <SliceZone {...props} resolver={resolver} />
       </Layout>
     </>

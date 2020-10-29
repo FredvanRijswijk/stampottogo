@@ -5,7 +5,6 @@ import Cart from '../components/Cart'
 import CartSummary from '../components/CartSummary'
 import Products from '../components/Products'
 
-import { jsx, Styled } from 'theme-ui'
 
 
 const OrderPage: NextPage = () => {

@@ -3,8 +3,9 @@ import React, { useState, useEffect } from 'react'
 import { useShoppingCart } from 'use-shopping-cart'
 import { fetchPostJSON } from '../utils/api-helpers'
 
+
 const CartSummary = () => {
-  const [loading, setLoading] = useState(false)
+  const [isLoading, setLoading] = useState(false);
   const [cartEmpty, setCartEmpty] = useState(true)
   const {
     formattedTotalPrice,
@@ -69,11 +70,7 @@ const CartSummary = () => {
       <p suppressHydrationWarning>
         <strong>Totaal prijs:</strong> {formattedTotalPrice}
       </p>
-      <button
-        className="cart-style-background"
-        type="submit"
-        disabled={cartEmpty || loading}
-      >
+      <button type="submit" disabled={cartEmpty || isLoading}>
         Betaal
       </button>
       <button

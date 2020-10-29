@@ -1,6 +1,6 @@
 // pages/_document.js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { InitializeColorMode } from 'theme-ui'
+
 
 // import { createResolver } from 'next-slicezone/resolver'
 
@@ -34,7 +34,6 @@ export default class extends Document {
         height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
       }}
     />
-          <InitializeColorMode />
           <Main />
           <NextScript />
         </body>
