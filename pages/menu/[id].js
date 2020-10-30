@@ -1,20 +1,21 @@
 import { useRouter } from 'next/router'
 import Image from 'next/image'
 import { formatCurrencyString } from 'use-shopping-cart'
+
 export default function MenuItem({ item, preview }) {
     const router = useRouter()
     
     if (!router.isFallback && !item?.sku) {
       return (<><p>OEPS</p></>)
     }
-    const { name = "", sku = "", price = "", description = "", currency = "" } = item || {};
+    const { name = "", sku = "", price = "", description = "", image = "", currency="eur" } = item || {};
 
-    if(item?.image !== "") {
+    if(image !== "") {
       return (
         <>
             <h1>{name}</h1>
             
-            <Image src={item?.image} alt={name} width="320" height="320" />
+            <Image src={image} alt={name} width="320" height="320" />
             <p>{description}</p>
             <p>{formatCurrencyString({
               value: price,
