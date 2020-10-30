@@ -5,7 +5,7 @@ export default function MenuItem({ item, preview }) {
     const router = useRouter()
     
     if (!router.isFallback && !item?.sku) {
-      return <ErrorPage statusCode={404} />
+      return (<><p>OEPS</p></>)
     }
     const { name = "", sku = "", image = "", price = "", description = "" } = item || {};
 
