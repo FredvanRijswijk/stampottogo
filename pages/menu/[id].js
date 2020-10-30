@@ -46,6 +46,7 @@ export async function getStaticProps({ params, preview = null }) {
             ...data?.dishes[0],
           },
         },
+        revalidate: 20,
       }
   }
   
