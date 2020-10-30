@@ -7,11 +7,12 @@ export default function MenuItem({ item, preview }) {
     if (!router.isFallback && !item?.sku) {
       return <ErrorPage statusCode={404} />
     }
-    const formattedContent = JSON.stringify(item, null, 2)
-    
+    const { name = "", sku = "", image = "", price = "", description = "" } = item || {};
+
     return (
         <>
-            <pre>{formattedContent}</pre>
+            <h1>{name}</h1>
+    <pre>{sku}, {image}, {price}, {description}</pre>
         </>
     )
 }
