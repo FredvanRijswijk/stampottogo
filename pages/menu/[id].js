@@ -7,16 +7,18 @@ export default function MenuItem({ item, preview }) {
     if (!router.isFallback && !item?.sku) {
       return <ErrorPage statusCode={404} />
     }
+    const formattedContent = JSON.stringify(item, null, 2)
+    
     return (
         <>
-            {item.name}
+            <pre>{formattedContent}</pre>
         </>
     )
 }
 
 export async function getStaticProps({ params, preview = null }) {
     const { id } = params
-    const data = await fetch(`${process.env.NEXT_BASE_URL}/api/dish?slug=${id}`).then((res) => res.json())
+    const data = await fetch(`${process.env.FIREBASE_CLOUD_FUNCTION_URL}/getDish?slug=${id}`).then((res) => res.json())
   
     return {
         props: {
@@ -37,6 +39,6 @@ export async function getStaticProps({ params, preview = null }) {
   }
 
   export async function getAllPostsWithSlug() {
-    const response = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
+    const response = await fetch(`${process.env.FIREBASE_CLOUD_FUNCTION_URL}/getDishes`).then((res) => res.json())
     return response?.dishes
   }
