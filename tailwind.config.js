@@ -17,7 +17,15 @@ module.exports = {
     
   ],
   theme: {
-    extend: {},
+    extend: {
+      colors: {
+        cyan: '#9cdbff',
+      },
+    },
+    fontFamily: {
+      display: ['Gilroy', 'sans-serif'],
+      body: ['Graphik', 'sans-serif'],
+    },
   },
   variants: {},
   plugins: [],
