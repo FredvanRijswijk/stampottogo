@@ -165,12 +165,20 @@ const CartSummary = () => {
             </tbody>
           </table>
           <hr className="pb-6 mt-6 min-w-screen" />
+          <div className="flex justify-between ">
+          <div>
+          <button onClick={() => clearCart()} className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+              Leeg winkelwagentje 
+            </button>
+            </div>
           <div className="text-right">
+          
             <button type="submit" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
               Ga verder naar betalen 
             </button>
             
         </div>
+          </div>
         </form>
         </div>
       </div>
