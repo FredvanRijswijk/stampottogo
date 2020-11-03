@@ -32,7 +32,7 @@ const HomePage = (props) => {
       <NextSeo
         title={meta_title}
         description={meta_description}
-        canonical={`https://www.stamppottogo.nl/`}
+        canonical={process.env.NEXT_BASE_URL}
       />
       {/* <HeaderBanner title="Bla Bla Bla" title_small="Bla Bla ..." /> */}
 
