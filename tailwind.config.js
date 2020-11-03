@@ -19,12 +19,30 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        cyan: '#9cdbff',
+        'brandcolor': '#FEDF25',
+        'brandcolor-600': '#FEDF25',
+        'brandcolor-900': '#FEDF25',
       },
     },
     fontFamily: {
-      display: ['Gilroy', 'sans-serif'],
-      body: ['Graphik', 'sans-serif'],
+      sans: [
+        'Inter',
+        'system-ui',
+        '-apple-system',
+        'BlinkMacSystemFont',
+        '"Segoe UI"',
+        'Roboto',
+        '"Helvetica Neue"',
+        'Arial',
+        '"Noto Sans"',
+        'sans-serif',
+        '"Apple Color Emoji"',
+        '"Segoe UI Emoji"',
+        '"Segoe UI Symbol"',
+        '"Noto Color Emoji"',
+      ],
+      serif: ['Georgia', 'Cambria', '"Times New Roman"', 'Times', 'serif'],
+      mono: ['Menlo', 'Monaco', 'Consolas', '"Liberation Mono"', '"Courier New"', 'monospace'],
     },
   },
   variants: {},

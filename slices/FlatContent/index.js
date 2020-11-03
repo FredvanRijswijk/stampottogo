@@ -28,8 +28,8 @@ const FlatContent = ({ slice }) => (
 
 
   <Wrap>
-{ slice.primary.title ? <RichText render={slice.primary.title} /> : <p></p>}
-    { slice.primary.subtitle_headline ? <RichText render={slice.primary.subtitle_headline} /> : <p></p>}
+{ slice.primary.title ? <RichText render={slice.primary.title} /> : <div></div>}
+    { slice.primary.subtitle_headline ? <RichText render={slice.primary.subtitle_headline} /> : <div></div>}
     
     { slice.primary.description && (
       <Desc sx={{ textAlign: 'left', mx: 0 }}>

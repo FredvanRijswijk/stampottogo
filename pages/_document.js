@@ -29,13 +29,16 @@ export default class extends Document {
               __html: 
               `!function(c,h,i,m,p){m=c.createElement(h),p=c.getElementsByTagName(h)[0],m.async=1,m.src=i,p.parentNode.insertBefore(m,p)}(document,"script","https://chimpstatic.com/mcjs-connected/js/users/2681af4d3994d7dc878c7f43e/701c9b67d441761322e37345e.js");`}}></script>
           </Head>
-        <body>
+        <body className="items-center justify-center">
         <noscript dangerouslySetInnerHTML={{ __html: `<iframe src="https://www.googletagmanager.com/ns.html?id=GTM-WLD7BJZ"
         height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
       }}
     />
+
+          <div className="antialiased text-gray-900">
           <Main />
           <NextScript />
+          </div>
         </body>
         
       </Html>

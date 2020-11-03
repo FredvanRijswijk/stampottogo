@@ -7,21 +7,27 @@ import Footer from "./Footer";
 const Layout = ({menu, children }) => {
   if (menu) {
     return (
-      <div>
+      <div className="flex">
         {/* <Head>
           <title>Slice Machine - NextJS</title>
           <link rel="icon" href="/favicon.ico" />
         </Head> */}
         <Navbar />
         <main>{children}</main>
+
+        <Footer />
+
       </div>
     );
   } 
 
   return (
-    <div>
+    <div className="flex">
+
       <main>{children}</main>
+      
       <Footer />
+
     </div>
     
   )

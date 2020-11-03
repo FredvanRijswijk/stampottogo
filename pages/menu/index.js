@@ -1,5 +1,5 @@
 import React from "react";
-import Link from "next/link"
+import NextLink, { LinkProps as NextLinkProps } from 'next/link'
 
 // posts will be populated at build time by getStaticProps()
 function Menu({ posts }) {
@@ -7,7 +7,7 @@ function Menu({ posts }) {
       <ul>
         {posts.dishes.map((post) => (
           <li>
-            <Link href={`/menu/${post.sku}`} >{post.name}</Link>
+            <NextLink href={`/menu/${post.sku}`} >{post.name}</NextLink>
           </li>
         ))}
       </ul>

@@ -6,7 +6,7 @@ export default function MenuItem({ item, preview }) {
     const router = useRouter()
     
     if (!router.isFallback && !item?.sku) {
-      return (<><p>OEPS</p></>)
+      return (<><div>OEPS</div></>)
     }
     const { name = "", sku = "", price = "", description = "", image = "", currency="eur" } = item || {};
 
@@ -16,11 +16,11 @@ export default function MenuItem({ item, preview }) {
             <h1>{name}</h1>
             
             <Image src={image} alt={name} width="320" height="320" />
-            <p>{description}</p>
-            <p>{formatCurrencyString({
+            <div>{description}</div>
+            <div>{formatCurrencyString({
               value: price,
               currency: currency,
-            })}</p>
+            })}</div>
 
         </>
     )       
@@ -29,7 +29,7 @@ export default function MenuItem({ item, preview }) {
     return (
       <>
           <h1>{name}</h1>
-          <p>{description}</p>
+          <div>{description}</div>
 
       </>
   )

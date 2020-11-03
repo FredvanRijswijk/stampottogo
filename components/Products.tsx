@@ -18,24 +18,32 @@ const Products = () => {
   
 
   return (
-    <section className="products">
+    <>
       {data.dishes.map((dishes) => (
-        <div key={dishes.sku} className="product">
-          <Image src={dishes.image} alt={dishes.name} width="320" height="320"/>
-          <Heading as='h3'>{dishes.name}</Heading>
-          <p className="price">
-            {formatCurrencyString({
+        <>
+        <div className="px-2 py-2 m-8 sm:m-1">
+        <div key={dishes.sku} className="bg-white border rounded-lg overflow-hidden">
+          <Image src={dishes.image} alt={dishes.name} unsized className="object-fill w-full"/>
+          <div className="p-6">
+          <h2 className="font-semibold text-xl uppercase">{dishes.name}</h2>
+          <div className="flex justify-between">
+            <div className="text-gray-600 text-sm">{dishes.weight}</div>
+            <div className="text-gray-900 text-lg font-bold">{formatCurrencyString({
               value: dishes.price,
               currency: dishes.currency,
-            })}
-          </p>
-          <button
-          color="warning"
+              language: 'nl-NL'
+            })}</div>
+          </div>
+          <div className="mt-2 leading-tight">
+            {dishes.description}
+          </div>
+          <div className="mt-4">
+          <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
             onClick={() => addItem(dishes)}
           >
             Toevoegen
           </button>
-          <button
+          {/* <button
             
             onClick={() => decrementItem(dishes.sku, 1)}
           />
@@ -47,10 +55,14 @@ const Products = () => {
             onClick={() => removeItem(dishes.sku)}
           >
             Verwijderen
-          </button>
+          </button> */}
+          </div>
+          </div>
         </div>
+        </div>
+        </>
       ))}
-    </section>
+      </> 
   )
 }
 

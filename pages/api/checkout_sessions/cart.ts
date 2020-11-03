@@ -45,12 +45,10 @@ export default async function handler(
         submit_type: 'pay',
         payment_method_types: ['card', 'ideal'],
         billing_address_collection: 'auto',
-        shipping_address_collection: {
-          allowed_countries: ['NL'],
-        },
+        
         line_items,
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/bestel`,
+        cancel_url: `${req.headers.origin}/stamppotje`,
         metadata: {
           pickup: meta.meta,
           time: meta.oke
