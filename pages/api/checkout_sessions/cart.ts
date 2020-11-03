@@ -50,7 +50,7 @@ export default async function handler(
         // },
         line_items,
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
-        cancel_url: `${req.headers.origin}/stamppotje`,
+        cancel_url: `${req.headers.origin}/winkelwagentje`,
         metadata: {
           pickup: meta.meta,
           time: meta.oke
