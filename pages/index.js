@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { NextSeo } from "next-seo";
-
+import Image from "next/image";
 
 import Layout from "./../components/Layout";
 import HeaderBanner from "./../components/HeaderBanner";
@@ -9,10 +9,12 @@ import Products from "../components/Products";
 import CartNavBar from "../components/CartNavBar";
 import Cart from "../components/Cart";
 import Navbar from "../components/Navbar";
+import Footer from "../components/Footer";
 
+// import { Box, Link, Text, Card } from 'theme-ui'
 
 const HomePage = (props) => {
-  const { meta_title = "", meta_description = "" } = props.data || {};
+  const { meta_title = "STAMPPOT to go", meta_description = "Lokaal af te halen en binnenkort in heel Nederland te bestellen" } = props.data || {};
 
   return (
     <>
@@ -32,7 +34,7 @@ const HomePage = (props) => {
       <NextSeo
         title={meta_title}
         description={meta_description}
-        canonical={process.env.NEXT_BASE_URL}
+        canonical={`https://www.stamppottogo.nl/`}
       />
       {/* <HeaderBanner title="Bla Bla Bla" title_small="Bla Bla ..." /> */}
 
@@ -59,6 +61,7 @@ const HomePage = (props) => {
             <Products />
           </div>
         </Cart>
+        <Footer />
       </>
     </>
   );

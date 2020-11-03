@@ -13,7 +13,7 @@ const Products = () => {
   const { addItem, removeItem, incrementItem, decrementItem } = useShoppingCart()
 
   if (error) return <div>Oeps er ging iets mis</div>
-  if (!data) return <div>Laden...</div>
+  if (!data) return <div>Ben even kijk in de keuken wat voor lekkers ze aan het maken zijn, momentje </div>
 
   // console.log(data.dishes);
   

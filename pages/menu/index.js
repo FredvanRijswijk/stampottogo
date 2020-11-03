@@ -7,7 +7,7 @@ import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 // posts will be populated at build time by getStaticProps()
 function Menu({ posts }) {
-  const { addItem, removeItem, incrementItem, decrementItem } = useShoppingCart()
+  const { addItem } = useShoppingCart()
     return (
       <Cart>
           <Navbar />
@@ -32,9 +32,9 @@ function Menu({ posts }) {
             </div>
             <div className="mt-4">
             <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
-              onClick={() => addItem(post)}
+              onClick={addItem(post)}
             >
-              Toevoegen
+              Bekijk
             </button>
             {/* <button
               
