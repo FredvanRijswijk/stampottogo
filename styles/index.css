@@ -14,3 +14,16 @@
       @apply text-2xl;
     }
   }
+
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 600;
+    font-display: auto;
+    src: url(../public/static/fonts/Inter-Bold.woff2) format("woff");
+  }
+  @font-face {
+    font-family: 'Inter';
+    font-weight: 200;
+    font-display: auto;
+    src: url(../public/static/fonts/Inter-Regular.woff2) format("woff");
+  }

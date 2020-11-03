@@ -2,22 +2,7 @@ import React from "react";
 import NextApp from "next/app";
 import Head from "next/head";
 
-import { theme } from "essential-slices";
 import "../styles/index.css"
-
-
-
-const customTheme = {
-  ...theme,
-  colors: {
-    ...theme.colors,
-    brand: {
-      900: "#1a365d",
-      800: "#153e75",
-      700: "#2a69ac",
-    },
-  },
-};
 
 export function reportWebVitals({ id, name, label, value }) {
   window.dataLayer = window.dataLayer || [];

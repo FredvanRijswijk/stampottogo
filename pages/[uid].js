@@ -10,7 +10,7 @@ import resolver from "../sm-resolver.js";
 import Layout from "./../components/Layout";
 
 const Page = (props) => {
-  console.log(props);
+  // console.log(props);
   const { meta_title = "", meta_description = "" } = props.data || {};
   return (
     <>
