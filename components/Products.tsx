@@ -9,7 +9,7 @@ const fetcher = (url) => fetch(url).then((res) => res.json())
 
 const Products = () => {
 
-  const { data, error } = useSwr(`${process.env.NEXT_PUBLIC_FIREBASE_CLOUD_FUNCTION_URL}/getDishes`, fetcher)
+  const { data, error } = useSwr('/api/dishes', fetcher)
   const { addItem, removeItem, incrementItem, decrementItem } = useShoppingCart()
 
   if (error) return <div>Oeps er ging iets mis</div>
