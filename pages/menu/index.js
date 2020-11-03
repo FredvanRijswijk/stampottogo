@@ -7,6 +7,7 @@ import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 
 // posts will be populated at build time by getStaticProps()
 function Menu({ posts }) {
+  const { addItem, removeItem, incrementItem, decrementItem } = useShoppingCart()
     return (
       <Cart>
           <Navbar />
