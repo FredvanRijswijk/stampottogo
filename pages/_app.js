@@ -1,8 +1,10 @@
+import SEO from '../next-seo.config';
 import React from "react";
 import NextApp from "next/app";
 import Head from "next/head";
 
 import "../styles/index.css"
+import { DefaultSeo, LocalBusinessJsonLd, LogoJsonLd } from 'next-seo';
 
 export function reportWebVitals({ id, name, label, value }) {
   window.dataLayer = window.dataLayer || [];
@@ -51,11 +53,11 @@ export default class App extends NextApp {
             name="viewport"
             content="width=device-width, initial-scale=1, maximum-scale=5"
           ></meta>
-          <title>STAMPOT to go</title>
+          <title>STAMPOT to go - Dageverse stamppot om af te halen </title>
           <meta charSet="utf-8" />
           <link rel="icon" href="/favicon.png" type="image/png" />
           <link rel="shortcut icon" href="/favicon.ico" />
-          <link rel="preload" as="image" href="https://prismic-io.s3.amazonaws.com/attiqweb-slices/0fffd5d7-c328-4df2-b957-e2893ec260ec_attiqlab-logo.svg" />
+
           <meta name="msapplication-TileColor" content="#000000" />
           <meta name="msapplication-config" content="browserconfig.xml" />
           <meta name="theme-color" content="#000" />
@@ -70,6 +72,11 @@ export default class App extends NextApp {
           <link rel="preconnect" href="https://stats.g.doubleclick.net" />
           <link rel="preconnect" href="https://www.googletagmanager.com" />
         </Head>
+        <DefaultSeo {...SEO} />
+        <LogoJsonLd
+          logo="https://res.cloudinary.com/stamppot-to-go/image/upload/v1604488851/logo_m2v83g.png"
+          url="https://www.stamppottogo.nl"
+        />
             <Component {...pageProps} />
       </>
     );

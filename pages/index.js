@@ -43,7 +43,7 @@ const HomePage = (props) => {
           <Navbar />
           <div className="flex bg-brandcolor h-24 pb-64 pt-16 pl-8 pr-8">
             {/* <SliceZone {...props} resolver={resolver} />*/}
-            <div className="text-center">
+            <div className="flex-1 text-center">
               <h1 className="font-semibold text-2xl">
                 {" "}
                 Welkom bij STAMPPOT to go{" "}
