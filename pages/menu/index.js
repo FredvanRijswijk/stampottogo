@@ -16,7 +16,7 @@ function Menu({ posts }) {
           <>
           <div className="px-2 py-2 m-8 sm:m-1">
           <div key={post.sku} className="bg-white border rounded-lg overflow-hidden">
-            <Image src={post.image} alt={post.name} unsized className="object-fill w-full"/>
+            <Image src={post.image} alt={post.name} layout="fill" className="object-fill w-full"/>
             <div className="p-6">
             <h2 className="font-semibold text-xl uppercase">{post.name}</h2>
             <div className="flex justify-between">

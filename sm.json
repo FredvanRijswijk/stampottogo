@@ -1,1 +1,8 @@
-{"libraries":["@/slices","essential-slices"],"apiEndpoint":"https://stamppot.cdn.prismic.io/api/v2"}
+{
+  "libraries": [
+    "@/slices",
+    "essential-slices"
+  ],
+  "apiEndpoint": "https://stamppot.cdn.prismic.io/api/v2",
+  "storybook": "http://localhost:8888"
+}

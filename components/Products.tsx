@@ -24,7 +24,7 @@ const Products = () => {
         <>
         <div className="px-2 py-2 m-8 sm:m-1">
         <div key={dishes.sku} className="bg-white border rounded-lg overflow-hidden">
-          <Image src={dishes.image} alt={dishes.name} unsized className="object-fill w-full"/>
+          <Image src={dishes.image} alt={dishes.name} layout="fill" className="object-fill w-full"/>
           <div className="p-6">
           <h2 className="font-semibold text-xl uppercase">{dishes.name}</h2>
           <div className="flex justify-between">
