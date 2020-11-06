@@ -54,7 +54,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         paymentIntent = event.data.object as Stripe.PaymentIntent;
         const payTo = event.data.object as Stripe.Charge
         await slackWebhook.send({
-          text: `💰 PaymentIntent status: ${paymentIntent.status} | ${payTo}`,
+          text: `💰 PaymentIntent status: ${paymentIntent.status} | ${payTo.billing_details}`,
         });
         console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
         break;
