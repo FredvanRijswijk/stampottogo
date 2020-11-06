@@ -1,6 +1,7 @@
 import { buffer } from 'micro'
 import Cors from 'micro-cors'
 import { NextApiRequest, NextApiResponse } from 'next'
+import { IncomingWebhook } from '@slack/webhook'
 
 import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -9,6 +10,9 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET!
+const slackUrl = process.env.SLACK_WEBHOOK_URL;
+
+const slackWebhook = new IncomingWebhook(slackUrl)
 
 // Stripe requires the raw body to construct the event.
 export const config = {
@@ -48,6 +52,9 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         intent = event.data.object;
         console.log("Succeeded:", intent.id);
         paymentIntent = event.data.object as Stripe.PaymentIntent;
+        await slackWebhook.send({
+          text: `💰 PaymentIntent status: ${paymentIntent.status}`,
+        });
         console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
         break;
       case 'payment_intent.payment_failed':
@@ -55,10 +62,16 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         const message = intent.last_payment_error && intent.last_payment_error.message;
         console.log('Failed:', intent.id, message);
         paymentIntent = event.data.object as Stripe.PaymentIntent
+        await slackWebhook.send({
+          text:`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`,
+        });
       console.log(`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`)
         break;
       case 'payment_intent.created':
         charge = event.data.object as Stripe.Charge;
+        await slackWebhook.send({
+          text:`💵 Charge id: ${charge.id}`,
+        });
         console.log(`💵 Charge id: ${charge.id}`)
         break;
     }
@@ -90,5 +103,6 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     res.status(405).end('Method Not Allowed')
   }
 }
+
 
 export default cors(webhookHandler as any)

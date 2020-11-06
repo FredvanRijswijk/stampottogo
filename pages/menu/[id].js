@@ -15,7 +15,7 @@ export default function MenuItem({ item, preview }) {
         <>
             <h1>{name}</h1>
             
-            <Image src={image} alt={name} width="320" height="320" />
+            <Image src={image} alt={name} layout="responsive" width="320" height="320" />
             <div>{description}</div>
             <div>{formatCurrencyString({
               value: price,
