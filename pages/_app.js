@@ -5,6 +5,9 @@ import Head from "next/head";
 
 import "../styles/index.css"
 import { DefaultSeo, LocalBusinessJsonLd, LogoJsonLd } from 'next-seo';
+import { CartProvider } from 'use-shopping-cart';
+import getStripe from '../utils/get-stripe'
+import * as config from '../config'
 
 export function reportWebVitals({ id, name, label, value }) {
   window.dataLayer = window.dataLayer || [];
@@ -77,7 +80,12 @@ export default class App extends NextApp {
           logo="https://res.cloudinary.com/stamppot-to-go/image/upload/v1604488851/logo_m2v83g.png"
           url="https://www.stamppottogo.nl"
         />
+        <CartProvider
+    mode="checkout-session"
+    stripe={getStripe()}
+    currency={config.CURRENCY}>
             <Component {...pageProps} />
+            </CartProvider>
       </>
     );
   }

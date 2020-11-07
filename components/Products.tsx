@@ -1,7 +1,5 @@
 
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
-// import products from '../data/products.json'
-import { Heading } from 'theme-ui'
 import useSwr from 'swr'
 import Image from 'next/image'
 
@@ -22,8 +20,8 @@ const Products = () => {
     <>
       {data.dishes.map((dishes) => (
         <>
-        <div className="px-2 py-2 m-8 sm:m-1">
-        <div key={dishes.sku} className="bg-white border rounded-lg overflow-hidden">
+        <div key={dishes.id} className="px-2 py-2 m-8 sm:m-1">
+        <div className="bg-white border rounded-lg overflow-hidden">
           <Image src={dishes.image} alt={dishes.name} layout="responsive" width="320" height="320" className="object-fill w-full"/>
           <div className="p-6">
           <h2 className="font-semibold text-xl uppercase">{dishes.name}</h2>

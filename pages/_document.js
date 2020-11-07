@@ -1,5 +1,6 @@
 // pages/_document.js
 import Document, { Html, Head, Main, NextScript } from 'next/document'
+import Cart from '../components/Cart'
 
 
 // import { createResolver } from 'next-slicezone/resolver'
@@ -34,11 +35,12 @@ export default class extends Document {
         height="0" width="0" style="display:none;visibility:hidden"></iframe>`,
       }}
     />
-
+        
           <div className="antialiased text-gray-900">
           <Main />
           <NextScript />
           </div>
+        
         </body>
         
       </Html>

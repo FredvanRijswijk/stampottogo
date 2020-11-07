@@ -11,7 +11,7 @@ const Navbar = () => {
       <nav>
             <div className="container mx-auto">
               
-              <div className="flex justify-center m-6 md:hidden ">
+              <div className="flex justify-center m-6 lg:hidden ">
               <NextLink href="/">
                 <Image
                   src="/static/images/no-picture.jpg"
