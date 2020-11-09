@@ -55,7 +55,7 @@ export default async function handler(
           pickup: meta.pickup,
           time: meta.time
         },
-        locale: 'nl',
+        locale: 'auto',
         
       }
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
