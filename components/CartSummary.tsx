@@ -30,8 +30,8 @@ const CartSummary = () => {
     // console.log('cartDetails:', cartDetails);
 
     const da = {
-      pickup: "test",
-      time: "erheiu iuehr",
+      pickup: "Hotel Central",
+      time: "18:00",
     };
 
     const cartData = JSON.stringify(cartDetails);
