@@ -62,15 +62,15 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     let intent = null;
 
     if (event.type === 'checkout.session.completed') {
-      const p = event.data.object as Stripe.Checkout.Session;
-        console.log(p.payment_intent);
-        const id = p.payment_intent.toString()
-        const payment = await stripe.paymentIntents.retrieve(id);
-        console.log("Succeeded:", payment);
-        await db.collection('orders').doc(payment.id).set(payment, { merge: true });
-        await slackWebhook.send({
-          text: `💰 PaymentIntent: ${p.payment_status}`,
-        });
+      const p = event.data.object as Stripe.PaymentIntent;
+        console.log('yfghfgh fgf gfg fgfh',p);
+        // const id = p.payment_intent.toString()
+        // const payment = await stripe.paymentIntents.retrieve(id);
+        // console.log("Succeeded:", payment);
+        // await db.collection('orders').doc(payment.id).set(payment, { merge: true });
+        // await slackWebhook.send({
+        //   text: `💰 PaymentIntent: ${p.payment_status}`,
+        // });
     }
 
     // Cast event data to Stripe object.
@@ -78,6 +78,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
       const paymentIntent = event.data.object as Stripe.PaymentIntent
       intent = event.data.object;
 
+      console.log(`💵 paymentIntent id: ${paymentIntent}`)
         
       // console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
     } else if (event.type === 'payment_intent.payment_failed') {

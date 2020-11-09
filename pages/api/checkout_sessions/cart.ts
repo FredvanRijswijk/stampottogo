@@ -27,10 +27,10 @@ export default async function handler(
 
   console.log('req.body ', req.body);
   
-  if (data.dishes) {
-    console.log('DATA Dishes', data.dishes);
+  // if (data.dishes) {
+  //   console.log('DATA Dishes', data.dishes);
     
-  }
+  // }
 
   if (req.method === 'POST') {
     
@@ -55,6 +55,7 @@ export default async function handler(
           pickup: meta.pickup,
           time: meta.time
         },
+        locale: 'nl',
         
       }
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
