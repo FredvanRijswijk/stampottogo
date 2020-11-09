@@ -30,8 +30,8 @@ const CartSummary = () => {
     // console.log('cartDetails:', cartDetails);
 
     const da = {
-      meta: "test",
-      oke: "erheiu iuehr",
+      pickup: "test",
+      time: "erheiu iuehr",
     };
 
     const cartData = JSON.stringify(cartDetails);

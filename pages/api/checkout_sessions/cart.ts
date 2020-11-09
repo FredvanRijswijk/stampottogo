@@ -52,9 +52,10 @@ export default async function handler(
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/winkelwagentje`,
         metadata: {
-          pickup: meta.meta,
-          time: meta.oke
-        }
+          pickup: meta.pickup,
+          time: meta.time
+        },
+        
       }
       const checkoutSession: Stripe.Checkout.Session = await stripe.checkout.sessions.create(
         params

@@ -67,7 +67,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         const id = p.payment_intent.toString()
         const payment = await stripe.paymentIntents.retrieve(id);
         console.log("Succeeded:", payment);
-        await db.collection('orders').add(payment);
+        await db.collection('orders').doc(payment.id).set(payment, { merge: true });
         await slackWebhook.send({
           text: `💰 PaymentIntent: ${p.payment_status}`,
         });
