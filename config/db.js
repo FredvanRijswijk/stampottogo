@@ -5,10 +5,12 @@ const firestore = firebase.firestore();
 const app = firebase.app();
 
 export function createUser(uid, data) {
+  const createdAt = firebase.firestore.Timestamp.now()
+  const mergeData = { createdAt, ...data}
   return firestore
     .collection('users')
     .doc(uid)
-    .set({ uid, ...data }, { merge: true });
+    .set({ uid, ...mergeData }, { merge: true });
 }
 
 export function createSite(data) {
