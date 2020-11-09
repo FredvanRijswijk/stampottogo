@@ -10,6 +10,7 @@ import { fetchGetJSON } from '../utils/api-helpers'
 import useSWR from 'swr'
 
 import { useState, useEffect } from "react"
+import Navbar from '@/components/Navbar'
 
 const ResultPage: NextPage = () => {
   const router = useRouter()
@@ -36,8 +37,10 @@ const ResultPage: NextPage = () => {
   if (error) return <div>failed to load</div>
 
   return (
-    <Layout menu="">
-      <div className="page-container">
+      
+      <>
+      <Navbar />
+      <div className="flex flex-col mx-auto max-w-lg w-full col-auto">
         <h1>Checkout Payment Result</h1>
         <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
         <h3>CheckoutSession response:</h3>
@@ -46,7 +49,7 @@ const ResultPage: NextPage = () => {
           <ClearCart />
         </Cart>
       </div>
-    </Layout>
+</>
   )
 }
 

@@ -3,6 +3,21 @@ import Cors from 'micro-cors'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { IncomingWebhook } from '@slack/webhook'
 
+import admin from 'firebase-admin';
+
+if (!admin.apps.length) {
+  admin.initializeApp({
+    credential: admin.credential.cert({
+      clientEmail: process.env.FIREBASE_CLIENT_EMAIL,
+      privateKey: process.env.FIREBASE_PRIVATE_KEY.replace(/\\n/g, '\n'),
+      projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID
+    }),
+    databaseURL: 'https://stamppot-togo.firebaseio.com'
+  });
+}
+
+const db = admin.firestore();
+
 import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   // https://github.com/stripe/stripe-node#configuration
@@ -13,7 +28,7 @@ const webhookSecret: string = process.env.STRIPE_WEBHOOK_SECRET!
 const slackUrl = process.env.SLACK_WEBHOOK_URL;
 
 const slackWebhook = new IncomingWebhook(slackUrl)
-
+ 
 // Stripe requires the raw body to construct the event.
 export const config = {
   api: {
@@ -45,42 +60,26 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
     console.log('✅ Success:', event.id)
 
     let intent = null;
-    let paymentIntent = null;
-    let charge = null;
-    switch (event['type']) {
-      case 'payment_intent.succeeded':
-        intent = event.data.object;
-        console.log("Succeeded:", intent.id);
-        paymentIntent = event.data.object as Stripe.PaymentIntent;
-        const payTo = event.data.object as Stripe.PaymentIntent
+
+    if (event.type === 'checkout.session.completed') {
+      const p = event.data.object as Stripe.Checkout.Session;
+        console.log(p.payment_intent);
+        const id = p.payment_intent.toString()
+        const payment = await stripe.paymentIntents.retrieve(id);
+        console.log("Succeeded:", payment);
+        await db.collection('orders').add(payment);
         await slackWebhook.send({
-          text: `💰 PaymentIntent: ${paymentIntent.status} | ${payTo.charges.data}`,
+          text: `💰 PaymentIntent: ${p.payment_status}`,
         });
-        console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
-        break;
-      case 'payment_intent.payment_failed':
-        intent = event.data.object;
-        const message = intent.last_payment_error && intent.last_payment_error.message;
-        console.log('Failed:', intent.id, message);
-        paymentIntent = event.data.object as Stripe.PaymentIntent
-        await slackWebhook.send({
-          text:`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`,
-        });
-      console.log(`❌ Payment failed: ${paymentIntent.last_payment_error?.message}`)
-        break;
-      case 'payment_intent.created':
-        charge = event.data.object as Stripe.Charge;
-        await slackWebhook.send({
-          text:`💵 Charge id: ${charge.id}`,
-        });
-        console.log(`💵 Charge id: ${charge.id}`)
-        break;
     }
 
     // Cast event data to Stripe object.
-    if (event.type === 'payment_intent.succeeded') {
+    else if (event.type === 'payment_intent.succeeded') {
       const paymentIntent = event.data.object as Stripe.PaymentIntent
-      console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
+      intent = event.data.object;
+
+        
+      // console.log(`💰 PaymentIntent status: ${paymentIntent.status}`)
     } else if (event.type === 'payment_intent.payment_failed') {
       const paymentIntent = event.data.object as Stripe.PaymentIntent
       console.log(

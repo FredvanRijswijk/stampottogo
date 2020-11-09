@@ -4,6 +4,7 @@ import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
 import { fetchPostJSON } from "../utils/api-helpers";
 
 import Image from "next/image";
+import ProductImageView from "./ProductImageView";
 
 const CartSummary = () => {
   const [isLoading, setLoading] = useState(false);
@@ -65,7 +66,7 @@ const CartSummary = () => {
           Winkelwagentje
           </h2>
           <h3>
-          Je hebt nog geen stamppotten gekozen of iets anders lekker en vers
+          Je hebt nog geen keuze opgegeven, ga snel naar ons menu en kies iets lekkers en vers.
         </h3>
       </div>
       </div>
@@ -111,13 +112,16 @@ const CartSummary = () => {
                 return (
                   <tr suppressHydrationWarning key={cartItem.sku}>
                     <td className="hidden pb-4 md:table-cell">
-                      <Image
+                    <div className="p-2">
+                      <ProductImageView
                         className="h-10 w-10 rounded-full"
-                        src={cartItem.image}
+                        url={cartItem.image}
                         alt=""
                         width="60"
                         height="60"
+                        layout="fill"
                       />
+                      </div>
                     </td>
                     <td>
                       <a href={`/menu/${sku}`}>
@@ -168,13 +172,13 @@ const CartSummary = () => {
           <div className="flex justify-between ">
           <div>
           <button onClick={() => clearCart()} className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-              Verwijderen 
+              Leeg 
           </button>
             </div>
           <div className="text-right">
           
             <button type="submit" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
-              Betalen 
+              Bestellen 
             </button>
             
         </div>

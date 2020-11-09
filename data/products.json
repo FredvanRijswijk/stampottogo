@@ -1,20 +1,22 @@
 [
     {
-      "name": "Zuurkool",
-      "description": "Zuurkool beschrijving",
+      "name": "Name menu item",
+      "description": "Description",
       "sku": "prod_IDgdkFy67WDNYt",
       "price": 699,
-      "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
-      "attribution": "Zuurkool",
-      "currency": "eur"
+      "image": "/images/no-picture.jpg",
+      "attribution": "alt text",
+      "currency": "eur",
+      "category": "dinner"
     },
     {
-      "name": "Boerenkool",
-      "description": "Boerenkool beschrijving",
+      "name": "ame menu item 2",
+      "description": "Description",
       "sku": "prod_IDctJ5pTwUq3Ud",
       "price": 999,
-      "image": "https://www.stamppottogo.nl/static/images/no-picture.jpg",
+      "image": "/images/no-picture.jpg",
       "attribution": "Test",
-      "currency": "eur"
+      "currency": "eur",
+      "category": "starter"
     }
   ]

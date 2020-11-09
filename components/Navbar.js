@@ -36,8 +36,8 @@ const Navbar = () => {
               className="flex items-center justify-between uppercase max-w-screen-md container mx-auto"
             >
               <div className="font-bold text-center px-4 py-2 m-2 hidden lg:block"><NextLink href="/">Home</NextLink></div>
-              <div className="font-bold text-center px-4 py-2 m-2 "><NextLink href="/menu">Stamppot</NextLink></div>
-              <div className="font-bold text-center px-4 py-2 m-2"><NextLink href="/bestel">Bestel</NextLink></div>
+              <div className="font-bold text-center px-4 py-2 m-2 "><NextLink href="/menu">Menu</NextLink></div>
+              <div className="font-bold text-center px-4 py-2 m-2"><NextLink href="/bestel">Over ons</NextLink></div>
               <CartNavBar />
             </div>
           </nav>

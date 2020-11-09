@@ -14,7 +14,8 @@ const Footer = () => {
                 About
             </Link> */}
     
-            <div className="p-6 container mx-auto"><span className="font-semibold text-gray-900">© 2020 STAMPPOT to go </span><span className="text-gray-600"> | STAMPPOT to go is een geregistreerd handelsmerk van AttiqLab B.V., geregistreerd bij de Kamer van Koophandel Brabant, Nederland, nummer 73700029</span></div>
+            <div className="p-6 container mx-auto text-sm"><span className="font-semibold text-gray-900">© 2020 STAMPPOT to go </span>
+            <span className="text-gray-600 text-xs"> | STAMPPOT to go is een geregistreerd handelsmerk van AttiqLab B.V., geregistreerd bij de Kamer van Koophandel Brabant, Nederland, nummer 73700029</span></div>
         </footer>
         
     )
