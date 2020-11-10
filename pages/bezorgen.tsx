@@ -22,6 +22,7 @@ import Cart from "../components/Cart";
 import { useRouter } from "next/router";
 import NavBarLogo from "@/components/NavBarLogo";
 import StripeTestCards from "@/components/StripeTestCards";
+import Link from "next/link";
 
 const ELEMENT_OPTIONS = {
   classes: {
@@ -117,7 +118,8 @@ const CheckoutForm = () => {
     const delivery = {
       location: "ce",
       time: time,
-      day: day
+      day: day,
+      uid: user.uid
     };
 
     const cartData = JSON.stringify(cartDetails);
@@ -328,6 +330,7 @@ const OrderPage: NextPage = () => {
   return (
     <>
       <NavBarLogo />
+      <div className="text-center font-light px-4 py-2 m-2 hidden lg:block"><Link href="/winkelwagentje">* Terug naar winkelwagentje</Link></div>
       <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
         <h2 className="font-bold uppercase">Bezorging</h2>
           <CheckoutForm />

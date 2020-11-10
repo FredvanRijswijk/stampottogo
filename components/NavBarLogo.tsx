@@ -33,7 +33,7 @@ const NavBarLogo = () => {
               id="menu"
               className="flex items-center justify-between uppercase max-w-screen-md container mx-auto"
             >
-              <div className="text-center font-light px-4 py-2 m-2 hidden lg:block"><Link href="/winkelwagentje"> * terug naar winkelwagen</Link></div>
+              
               
             </div>
           </nav>

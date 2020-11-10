@@ -43,29 +43,26 @@ const HomePage = ({ posts }) => {
         description='Lokaal af te halen en binnenkort in heel Nederland te bestellen'
         canonical={`https://www.stamppottogo.nl/`}
       />
-      <HeaderBanner title="In samenwerking met Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="ism Het Zomerpaleis stamppotten & snert" />
+      <HeaderBanner title="Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="Stamppotten & Snert" />
 
       <>
         
           <Navbar />
           <ToastContainer />
-          <div className="flex bg-brandcolor h-24 pb-64 pt-16 pl-8 pr-8">
+          <div className="flex bg-brandcolor pb-32 pt-16 pl-8 pr-8">
             {/* <SliceZone {...props} resolver={resolver} />*/}
             <div className="flex-1 text-center">
-              <h1 className="font-semibold text-2xl">
+              <h1 className="font-semibold text-2xl p-8">
                 {" "}
-                Welkom bij STAMPPOT to go{" "}
+                Uit de keuken van Het Zomerpaleis STAMPPOT to go{" "}
               </h1>
               <p>
-                Tijdens deze 2e lockdown voor de horeca en het seizoen hebben we
-                STAMPPOT to go opgezet om uit verschillende horeca keukens
-                lekkere Hollandse stamppot te verkopen. Voor zowel afhalen als
-                thuisbezorgen.
+              Tijdens deze 2e lockdown voor de horeca willen we toch een stukje Oeteldonk in huis brengen. Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep. Zo kun je toch genieten van je jaarlijkse 11-11 gerecht zonder zelf je spierballen te hoeven gebruiken.
               </p>
             </div>
           </div>
-          <div className="flex bg-brandcolor h-12 mb-8"></div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mt-32">
+          
+          <div className="grid grid-cols-1 -mt-24 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 ">
 
           
         {posts.dishes.map((post) => (

@@ -13,9 +13,12 @@ import { useState, useEffect } from "react"
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 import NavBarLogo from '@/components/NavBarLogo'
+import { useAuth } from "@/lib/auth";
+
 
 const ResultPage: NextPage = () => {
   const router = useRouter()
+  const { user } = useAuth();
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
@@ -36,7 +39,13 @@ const ResultPage: NextPage = () => {
     fetchGetJSON
   )
 
+
   if (error) return <div>failed to load</div>
+
+
+  if (user) {
+    console.log(user.uid);
+  }
 
   return (
       
@@ -45,13 +54,11 @@ const ResultPage: NextPage = () => {
       <div className="flex flex-col mx-auto max-w-lg w-full col-auto">
         <NavBarLogo />
         <h1>Bedankt</h1>
-        <Link href="/">
-        <a href="/">terug naar website</a>
-      </Link>
-        <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
-        <h3>CheckoutSession response:</h3>
-        <PrintObject content={data ?? 'loading...'} />
-        {data?.payment_intent?.customer}
+
+        {/* <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2> */}
+        {/* <h3>CheckoutSession response:</h3> */}
+        {/* <PrintObject content={data ?? 'loading...'} /> */}
+        {/* {data?.payment_intent?.customer} */}
         
           <ClearCart />
         
