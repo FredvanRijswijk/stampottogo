@@ -73,6 +73,7 @@ class ToastBottom extends React.Component {
             font-size: 1rem;
             margin: 16px;
             box-shadow: 0 24px 38px 3px rgba(0,0,0,0.14), 0 9px 46px 8px rgba(0,0,0,0.12), 0 11px 15px -7px rgba(0,0,0,0.2);
+            
           }
           .side-bar{
             padding: 10px;
@@ -120,10 +121,12 @@ class ToastBottom extends React.Component {
               position: absolute;
               bottom: 0px;
               animation: SlideInOutBottom ${props.duration}s ease-in-out;
+              z-index: 99;
           }
           @media (max-width: 400px) {
             .toast-message-container {
               width: 300px;
+              z-index: 99;
             }
           }
         `}</style>
