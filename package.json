@@ -39,6 +39,7 @@
     "react": "^16.13.1",
     "react-aria": "^3.0.0",
     "react-dom": "^16.13.1",
+    "react-nextjs-toast": "^1.2.5",
     "react-slick": "^0.27.11",
     "stripe": "^8.114.0",
     "styled-components": "^5.2.0",

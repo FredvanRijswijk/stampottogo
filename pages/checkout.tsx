@@ -11,6 +11,7 @@ import { Elements, CardElement, IdealBankElement, useElements, useStripe } from 
 import Axios from 'axios';
 import Cart from '../components/Cart'
 import { useRouter } from 'next/router';
+import NavBarLogo from '@/components/NavBarLogo';
 
 const ELEMENT_OPTIONS = {
   classes: {
@@ -123,7 +124,7 @@ const CheckoutForm = () => {
 
   return (
     <>
-    <Cart>
+    
     <form onSubmit={handleSubmit}>
       <label htmlFor="name">Full Name</label>
       <input
@@ -144,8 +145,9 @@ const CheckoutForm = () => {
           setEmail(e.target.value);
         }}
       />
-      <label htmlFor="ideal">iDEAL Bank</label>
+      <label htmlFor="ideal" className="font-bold">iDEAL Bank</label>
       <IdealBankElement
+        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id="ideal"
         onBlur={logEvent('blur')}
         onChange={logEvent('change')}
@@ -153,8 +155,6 @@ const CheckoutForm = () => {
         onReady={logEvent('ready')}
         options={ELEMENT_OPTIONS}
       />
-
-      <CardElement  />
     
       {errorMessage && <ErrorResult>{errorMessage}</ErrorResult>}
       {paymentMethod && <Result>Got PaymentMethod: {paymentMethod.id}</Result>}
@@ -163,7 +163,7 @@ const CheckoutForm = () => {
         {isProccessing ? "Verwerken van bestelling" : `Betaal`}
       </button>
     </form>
-    </Cart>
+    
     </>
   )
 }
@@ -178,9 +178,10 @@ const OrderPage: NextPage = () => {
   const router = useRouter()
 
   return (
-    <Layout menu="">
-      <div className="page-container">
-        <h1>Checkout</h1>
+    <>
+    <NavBarLogo />
+    <div className="flex flex-col max-w-lg w-full">
+        <h2 className="font-bold uppercase">Afrekenen</h2>
 
         <Elements stripe={getStripe()}>
           <CheckoutForm />
@@ -189,7 +190,7 @@ const OrderPage: NextPage = () => {
           <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="flex-shrink-0 w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
           <p className="ml-3 text-xs">Alle transacties gaan via <abbr title="Grootste en veiligste betaalplatform">Stripe</abbr> betaalplatform.</p></div>
       </div>
-    </Layout>
+    </>
   )
 }
 
