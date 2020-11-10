@@ -7,29 +7,37 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 })
 
 export default async (
-    req: NextApiRequest,
-    res: NextApiResponse) => {
+  req: NextApiRequest,
+  res: NextApiResponse) => {
 
-    const { amount, email } = req.body
-    console.log(amount);
+  const myDishes = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
 
-    //pay
-
+  // pay
+  if (req.method === 'POST') {
+    const data = req.body
+    console.log('BODY: ', req.body);
     try {
-        const payment = await stripe.paymentIntents.create({
-            amount: 1099,
-            payment_method_types: ['ideal'],
-            currency: 'eur',
-            receipt_email: email,
-            
-        })
+      const payment = await stripe.paymentIntents.create({
+        amount: data.amount,
+        payment_method_types: ['ideal', 'card'],
+        currency: 'eur',
+        receipt_email: data.email,
+        metadata: {
+          order_id: '451151'
+        },
 
-        console.log(payment.client_secret);
+      })
 
-        res.status(200).send(payment.client_secret);
-        
+      console.log('PAYMENT: ', payment.client_secret);
+
+      res.status(200).send(payment.client_secret);
+
     } catch (error) {
-        console.error(error)
-        return res.status(error.status || 500).end(error.message)
-      }
+      console.error(error)
+      return res.status(error.status || 500).end(error.message)
+    }
+  } else {
+    res.setHeader('Allow', 'POST')
+    res.status(405).end('Method Not Allowed')
+  }
 }

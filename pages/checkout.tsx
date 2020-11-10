@@ -12,6 +12,7 @@ import Axios from 'axios';
 import Cart from '../components/Cart'
 import { useRouter } from 'next/router';
 import NavBarLogo from '@/components/NavBarLogo';
+import StripeTestCards from '@/components/StripeTestCards';
 
 const ELEMENT_OPTIONS = {
   classes: {
@@ -40,8 +41,12 @@ const CheckoutForm = () => {
   const stripe = useStripe();
   const elements = useElements();
 
-  const [name, setName] = useState('');
+  const [firstName, setFirstName] = useState('');
+  const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
+  const [street, setStreet] = useState('');
+  const [city, setCity] = useState('');
+  const [postal_code, setPostalCode] = useState('');
 
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
@@ -62,10 +67,10 @@ const CheckoutForm = () => {
     const idealBankElement = elements.getElement(IdealBankElement);
 
     const address = {
-      line1: 'Kruisstraat 47',
+      line1: street,
       line2: '',
-      city: 'Den Bosch',
-      postal_code: '5211 DT',
+      city: city,
+      postal_code: postal_code,
       country: 'NL'
 
     }
@@ -75,7 +80,7 @@ const CheckoutForm = () => {
       ideal: idealBankElement,
       billing_details: {
         address,
-        name: name,
+        name: firstName + ' ' + lastName,
         email: email
       },
       metadata: {
@@ -91,10 +96,7 @@ const CheckoutForm = () => {
       setPaymentMethod(null);
     } else {
 
-      
-  
-      
-      console.log('[PaymentMethod]', payload);
+      console.log('[PaymentMethod] else ', payload);
       setPaymentMethod(payload.paymentMethod);
       setErrorMessage(null);
 
@@ -124,30 +126,98 @@ const CheckoutForm = () => {
 
   return (
     <>
-    
-    <form onSubmit={handleSubmit}>
-      <label htmlFor="name">Full Name</label>
-      <input
-        id="name"
+
+<form className="w-full max-w-lg" onSubmit={handleSubmit}>
+  <div className="flex flex-wrap -mx-3 mb-6">
+    <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+        Voornaam
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" id="name"
         required
-        placeholder="Jenny Rosen"
-        value={name}
+        placeholder="Kirsten"
+        value={firstName}
         onChange={(e) => {
-          setName(e.target.value);
-        }}
-      />
-      <label htmlFor="email">Email</label>
-      <input
-        id="email"
+          setFirstName(e.target.value);
+        }} />
+  
+    </div>
+    <div className="w-full md:w-1/2 px-3">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-last-name">
+        Achternaam
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500"  type="text" 
+        required
+        placeholder="van Rijswijk"
+        value={lastName}
+        onChange={(e) => {
+          setLastName(e.target.value);
+        }} />
+    </div>
+  </div>
+  <div className="flex flex-wrap -mx-3 mb-6">
+    <div className="w-full px-3">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-street">
+        Straat
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" 
+        required
+        placeholder="Markt 5"
+        value={street}
+        onChange={(e) => {
+          setStreet(e.target.value);
+        }} />
+   
+    </div>
+  </div>
+  
+  <div className="flex flex-wrap -mx-3 mb-2">
+    
+    <div className="w-full md:w-1/3 px-3 mb-6 md:mb-0">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-zip">
+        Postcode
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" 
+      required
+      placeholder="5211DT"
+      value={postal_code}
+      onChange={(e) => {
+        setPostalCode(e.target.value);
+      }} />
+    </div>
+    <div className="w-full md:w-2/3 px-3 mb-6 md:mb-0">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-city">
+        Stad
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" 
+      required
+      placeholder="'s-Hertogenbosch"
+        value={city}
+        onChange={(e) => {
+          setCity(e.target.value);
+        }} />
+    </div>
+  </div>
+
+  <div className="flex flex-wrap -mx-3 mb-6">
+    <div className="w-full px-3">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-email">
+        Email
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" type="text" 
         required
         value={email}
         onChange={(e) => {
           setEmail(e.target.value);
-        }}
-      />
-      <label htmlFor="ideal" className="font-bold">iDEAL Bank</label>
+        }} />
+   
+    </div>
+  </div>
+  <div className="flex flex-wrap -mx-3 mb-6">
+    <div className="w-full px-3">
+    <label htmlFor="ideal" className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2">iDEAL Bank</label>
       <IdealBankElement
-        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+        className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700  px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
         id="ideal"
         onBlur={logEvent('blur')}
         onChange={logEvent('change')}
@@ -155,21 +225,23 @@ const CheckoutForm = () => {
         onReady={logEvent('ready')}
         options={ELEMENT_OPTIONS}
       />
-    
+    </div>
+  </div>
+
       {errorMessage && <ErrorResult>{errorMessage}</ErrorResult>}
       {paymentMethod && <Result>Got PaymentMethod: {paymentMethod.id}</Result>}
       {paymentStatus && <Result>Got PaymentStatus: {paymentStatus}</Result>}
-      <button type="submit" disabled={isProccessing}>
+      <div className="text-right pt-4">
+      <button type="submit" disabled={isProccessing} className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
         {isProccessing ? "Verwerken van bestelling" : `Betaal`}
       </button>
+      </div>
     </form>
     
     </>
+    
   )
 }
-
-
-
 
 
 const OrderPage: NextPage = () => {
@@ -180,7 +252,7 @@ const OrderPage: NextPage = () => {
   return (
     <>
     <NavBarLogo />
-    <div className="flex flex-col max-w-lg w-full">
+    <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
         <h2 className="font-bold uppercase">Afrekenen</h2>
 
         <Elements stripe={getStripe()}>
