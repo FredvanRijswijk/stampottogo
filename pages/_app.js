@@ -56,7 +56,7 @@ export default class App extends NextApp {
         <Head>
           <meta
             name="viewport"
-            content="width=device-width, initial-scale=1, maximum-scale=5"
+            content="width=device-width, initial-scale=1, maximum-scale=5, user-scalable=no"
           ></meta>
           <title>STAMPOT to go - Dageverse stamppot om af te halen </title>
           <meta charSet="utf-8" />
