@@ -2,7 +2,7 @@
 const HeaderBanner = ({ ...props }) => {
   return (
       
-    <div className="bg-red-500">
+    <div className="bg-red-600">
   <div className="max-w-screen-xl mx-auto py-3 px-3 sm:px-6 lg:px-8">
     <div className="flex items-center justify-between flex-wrap">
       <div className="w-0 flex-1 flex items-center">
@@ -21,20 +21,7 @@ const HeaderBanner = ({ ...props }) => {
           </span>
         </div>
       </div>
-      <div className="order-3 mt-2 flex-shrink-0 w-full sm:order-2 sm:mt-0 sm:w-auto">
-        <div className="rounded-md shadow-sm">
-          <a href="#" className="flex items-center justify-center px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-red-600 bg-white hover:text-red-500 focus:outline-none focus:shadow-outline transition ease-in-out duration-150">
-            Meer informatie
-          </a>
-        </div>
-      </div>
-      {/* <div className="order-2 flex-shrink-0 sm:order-3 sm:ml-3">
-        <button type="button" className="-mr-1 flex p-2 rounded-md hover:bg-red-500 focus:outline-none focus:bg-red-500 sm:-mr-2 transition ease-in-out duration-150" aria-label="Dismiss">
-          <svg className="h-6 w-6 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div> */}
+      
     </div>
   </div>
 </div>

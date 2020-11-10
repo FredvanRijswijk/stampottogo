@@ -4,6 +4,7 @@ import Image from "next/image";
 
 import Head from "next/head";
 import Navbar from "../components/Navbar";
+import HeaderBanner from "../components/HeaderBanner";
 import Footer from "../components/Footer";
 import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import ProductImageView from '../components/ProductImageView'
@@ -33,7 +34,7 @@ const HomePage = ({ posts }) => {
         description='Lokaal af te halen en binnenkort in heel Nederland te bestellen'
         canonical={`https://www.stamppottogo.nl/`}
       />
-      {/* <HeaderBanner title="Bla Bla Bla" title_small="Bla Bla ..." /> */}
+      <HeaderBanner title="In samenwerking met Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="ism Het Zomerpaleis stamppotten & snert" />
 
       <>
         
@@ -54,7 +55,7 @@ const HomePage = ({ posts }) => {
             </div>
           </div>
           <div className="flex bg-brandcolor h-12 mb-8"></div>
-          <div className="grid grid-cols-1 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 -mt-32">
+          <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 -mt-32">
 
           
         {posts.dishes.map((post) => (

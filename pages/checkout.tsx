@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import { NextPage } from 'next'
 import Layout from '../components/Layout'
-
+import { useAuth } from '@/lib/auth'; 
 import getStripe from '../utils/get-stripe'
 
 import {logEvent, Result, ErrorResult} from '../utils/util';
@@ -35,10 +35,13 @@ const ELEMENT_OPTIONS = {
 
 
 const CheckoutForm = () => {
-  const stripe = useStripe()
+  const {user} = useAuth();
+  const stripe = useStripe();
   const elements = useElements();
+
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
+
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -57,15 +60,28 @@ const CheckoutForm = () => {
 
     const idealBankElement = elements.getElement(IdealBankElement);
 
+    const address = {
+      line1: 'Kruisstraat 47',
+      line2: '',
+      city: 'Den Bosch',
+      postal_code: '5211 DT',
+      country: 'NL'
+
+    }
 
     const payload = await stripe.createPaymentMethod({
       type: 'ideal',
       ideal: idealBankElement,
       billing_details: {
+        address,
         name: name,
         email: email
       },
-      
+      metadata: {
+        uid: user.uid,
+        location: 'ce',
+        time: '18:00'
+      }
     });
 
     if (payload.error) {

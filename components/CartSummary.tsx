@@ -5,6 +5,7 @@ import { fetchPostJSON } from "../utils/api-helpers";
 
 import Image from "next/image";
 import ProductImageView from "./ProductImageView";
+import Link from "next/link";
 
 const CartSummary = () => {
   const [isLoading, setLoading] = useState(false);
@@ -14,12 +15,16 @@ const CartSummary = () => {
     cartCount,
     clearCart,
     cartDetails,
-    incrementItem,
-    decrementItem,
     redirectToCheckout,
+    setItemQuantity
   } = useShoppingCart();
 
   useEffect(() => setCartEmpty(!cartCount), [cartCount]);
+
+  const options = []
+    for (let quantity = 1; quantity <= 20; ++quantity)
+      options.push(<option key={quantity} value={quantity}>{quantity}</option>)
+
 
   const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
     event
@@ -79,7 +84,6 @@ const CartSummary = () => {
           <h2 className="font-semibold uppercase text-center" suppressHydrationWarning>
             Hebben wij je bestelling zo compleet?
           </h2>
-          <form onSubmit={handleCheckout}>
           <table className="w-full text-sm lg:text-base">
             <thead>
               <tr className="h-12 uppercase">
@@ -91,6 +95,7 @@ const CartSummary = () => {
                   </span>
                   <span className="hidden lg:inline">Aantal</span>
                 </th>
+                {/* <th className="text-right">+/-</th> */}
                 <th className="hidden text-right md:table-cell">Per stuk</th>
                 <th className="text-right">Totaal</th>
               </tr>
@@ -131,7 +136,7 @@ const CartSummary = () => {
                         <small suppressHydrationWarning>{weight}</small>
                       </a>
                     </td>
-                    <td className="justify-center md:justify-end md:flex mt-6">
+                    {/* <td className="justify-center md:justify-end md:flex mt-6">
                       <div className="w-20 h-10">
                         <div className="relative flex flex-row w-full h-8">
                           <div
@@ -142,6 +147,38 @@ const CartSummary = () => {
                           </div>
                         </div>
                       </div>
+                    </td> */}
+                    <td className="text-right">
+                      <span
+                        className="text-sm lg:text-base font-medium"
+                        suppressHydrationWarning
+                      >
+                        <div className="relative">
+          <select className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+          id="quantity-select"
+          defaultValue={quantity}
+          onChange={(event) => {
+            setItemQuantity(sku, +event.target.value)}
+          }
+        >
+          {options}
+        </select>
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+            <svg className="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20"><path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path></svg>
+          </div>
+        </div>
+{/* <select
+className="text-sm lg:text-base font-medium"
+            id="quantity-select"
+            defaultValue={quantity}
+            onChange={(event) => {
+              setItemQuantity(sku, +event.target.value)}
+            }
+          >
+            {options}
+          </select> */}
+                        
+                      </span>
                     </td>
                     <td className="hidden text-right md:table-cell">
                       <span
@@ -157,7 +194,7 @@ const CartSummary = () => {
                     </td>
                     <td className="text-right">
                       <span
-                        className="text-sm lg:text-base font-medium"
+                        className="text-sm lg:text-base font-bold"
                         suppressHydrationWarning
                       >
                         {formattedValue}
@@ -176,14 +213,14 @@ const CartSummary = () => {
           </button>
             </div>
           <div className="text-right">
-          
-            <button type="submit" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+          <Link href="/checkout">
+            <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
               Bestellen 
             </button>
-            
+            </Link>
         </div>
           </div>
-        </form>
+      
         </div>
       </div>
       
