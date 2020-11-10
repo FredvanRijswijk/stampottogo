@@ -1,54 +1,95 @@
-import React, {useState, useEffect} from 'react';
-import { NextPage } from 'next'
-import Layout from '../components/Layout'
-import { useAuth } from '@/lib/auth'; 
-import getStripe from '../utils/get-stripe'
+import React, { useState, useEffect } from "react";
+import { NextPage } from "next";
+import Layout from "../components/Layout";
+import { useAuth } from "@/lib/auth";
+import getStripe from "../utils/get-stripe";
+import { format, formatDistance, formatRelative, subDays, addDays } from 'date-fns'
+import { nl } from 'date-fns/locale'
 
-import {logEvent, Result, ErrorResult} from '../utils/util';
+import { logEvent, Result, ErrorResult } from "../utils/util";
 import { fetchPostJSON } from "../utils/api-helpers";
 
-import { Elements, CardElement, IdealBankElement, useElements, useStripe } from '@stripe/react-stripe-js'
+import {
+  Elements,
+  CardElement,
+  IdealBankElement,
+  useElements,
+  useStripe,
+} from "@stripe/react-stripe-js";
 import { useShoppingCart, formatCurrencyString } from "use-shopping-cart";
-import Axios from 'axios';
-import Cart from '../components/Cart'
-import { useRouter } from 'next/router';
-import NavBarLogo from '@/components/NavBarLogo';
-import StripeTestCards from '@/components/StripeTestCards';
+import Axios from "axios";
+import Cart from "../components/Cart";
+import { useRouter } from "next/router";
+import NavBarLogo from "@/components/NavBarLogo";
+import StripeTestCards from "@/components/StripeTestCards";
 
 const ELEMENT_OPTIONS = {
   classes: {
-    base: 'StripeElementIdeal',
-    focus: 'StripeElementIdeal--focus',
+    base: "StripeElementIdeal",
+    focus: "StripeElementIdeal--focus",
   },
   style: {
     base: {
-      padding: '10px 14px',
-      fontSize: '18px',
-      color: '#424770',
-      letterSpacing: '0.025em',
-      '::placeholder': {
-        color: '#aab7c4',
+      padding: "10px 14px",
+      fontSize: "18px",
+      color: "#424770",
+      letterSpacing: "0.025em",
+      "::placeholder": {
+        color: "#aab7c4",
       },
     },
     invalid: {
-      color: '#9e2146',
+      color: "#9e2146",
     },
   },
 };
 
-
 const CheckoutForm = () => {
-  const {user} = useAuth();
-  const stripe = useStripe();
-  const elements = useElements();
 
-  const [firstName, setFirstName] = useState('Kirsten');
-  const [lastName, setLastName] = useState('van Rijswijk');
-  const [email, setEmail] = useState('fred@attiq.nl');
-  const [street, setStreet] = useState('Kruisstraat 47');
-  const [city, setCity] = useState('Den Bosch');
-  const [postal_code, setPostalCode] = useState('5211DT');
+  const today = new Date()
+  const tomorrow = addDays(new Date(), 1)
 
+  const optionsDate = [
+    <option key={'vandaag'} value={today.toDateString()}>
+      {'vandaag'}
+    </option>,
+    <option key={'morgen'} value={tomorrow.toDateString()}>
+    {'morgen'}
+  </option>
+  ]
+  
+  const optionsTime = [
+    <option key={'16:00'} value='16:00'>
+      {'16:00 - 16:30'}
+    </option>,
+    <option key={'16:30'} value='16:30'>
+    {'16:30 - 17:00'}
+  </option>,
+  <option key={'17:00'} value='17:00'>
+  {'17:00 - 17:30'}
+</option>,
+    <option key={'17:30'} value='17:30'>
+    {'17:30 - 18:00'}
+  </option>,
+  <option key={'18:00'} value='18:00'>
+  {'18:00 - 18:30'}
+</option>,
+    <option key={'18:30'} value='18:30'>
+    {'18:30 - 19:00'}
+  </option>,
+  <option key={'19:00'} value='19:00'>
+  {'19:00 - 19:30'}
+</option>,<option key={'19:30'} value='19:30'>
+    {'19:30 - 20:00'}
+  </option>
+    
+  ]
+
+ 
+
+  const { user } = useAuth();
+  const [time, setTime] = useState('');
+  const [day, setDay] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -62,31 +103,21 @@ const CheckoutForm = () => {
     cartDetails,
     redirectToCheckout,
     setItemQuantity,
-    totalPrice
+    totalPrice,
   } = useShoppingCart();
 
   useEffect(() => setCartEmpty(!cartCount), [cartCount]);
 
-  const handleCheckout: React.FormEventHandler<HTMLFormElement> = async (
-    event
-  ) => {
+  const handleCheckout = async (event) => {
     event.preventDefault();
     setProccessingTo(true);
 
     // console.log('cartDetails:', cartDetails);
 
-    const address = {
-      line1: street,
-      line2: '',
-      city: city,
-      postal_code: postal_code,
-      country: 'NL'
-
-    }
-
     const delivery = {
-      pickup: "Hotel Central",
-      time: "18:00",
+      location: "ce",
+      time: time,
+      day: day
     };
 
     const cartData = JSON.stringify(cartDetails);
@@ -113,109 +144,72 @@ const CheckoutForm = () => {
     redirectToCheckout({ sessionId: response.id });
   };
 
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-
-    if (!stripe || !elements) {
-      // Stripe.js has not loaded yet. Make sure to disable
-      // form submission until Stripe.js has loaded.
-      return;
-    }
-
-    setProccessingTo(true);
-
-    const idealBankElement = elements.getElement(IdealBankElement);
-
-    const address = {
-      line1: street,
-      line2: '',
-      city: city,
-      postal_code: postal_code,
-      country: 'NL'
-
-    }
-
-    const payload = await stripe.createPaymentMethod({
-      type: 'ideal',
-      ideal: idealBankElement,
-      billing_details: {
-        address,
-        name: firstName + ' ' + lastName,
-        email: email
-      },
-
-      metadata: {
-        uid: user.uid,
-        location: 'ce',
-        time: '18:00',
-      }
-    });
-
-    if (payload.error) {
-      console.log('[error]', payload.error);
-      setErrorMessage(payload.error.message);
-      setPaymentMethod(null);
-    } else {
-
-      console.log('[PaymentMethod] else ', payload);
-      setPaymentMethod(payload.paymentMethod);
-      setErrorMessage(null);
-
-      const data = {
-        amount: totalPrice,
-        email: email,
-        billing_details: {
-          address,
-          name: firstName + ' ' + lastName,
-          email: email
-        },
-        metadata: {
-          uid: user.uid,
-          location: 'ce',
-          time: '18:00'
-        }
-      }
-
-      const mergedata = {
-        cartDetails,
-        ...data
-      }
-
- 
-      const response = await Axios.post(
-        "/api/checkout_sessions/pay",
-        {totalPrice: totalPrice,
-          ...cartDetails}
-        
-      );
-
-      const pi: string = response.data
-
-      console.log('RESPONSE: ', pi);
-      
-
-      const confirmedPayment = await stripe.confirmIdealPayment(pi, {
-        receipt_email: email,
-        shipping: {
-          address: address,
-          name: firstName + ' ' + lastName
-
-        },
-        payment_method: payload.paymentMethod.id,
-        return_url: 'https://staging.stamppottogo.nl/checkout'
-      });
-      
-      setPaymentStatus(confirmedPayment.paymentIntent)
-      console.log(confirmedPayment); 
-      setErrorMessage(null);
-
-    }
-  };
+  
 
   return (
     <>
+      <form className="w-full max-w-lg" onSubmit={handleCheckout}>
+        <div className="flex flex-wrap -mx-3 mb-6">
+          <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              Datum
+            </label>
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="quantity-select"
+                defaultValue={day}
+                onChange={(event) => {setDay(event.target.value)}}
+              >
+                {optionsDate}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+                </svg>
+              </div>
+            </div>
 
-<form className="w-full max-w-lg" onSubmit={handleSubmit}>
+            <label
+              className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2"
+              htmlFor="grid-first-name"
+            >
+              Tijd
+            </label>
+            <div className="relative">
+              <select
+                className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                id="quantity-select"
+                defaultValue={time}
+                onChange={(event) => {setTime(event.target.value)}}
+              >
+                {optionsTime}
+              </select>
+              <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center px-2 text-gray-700">
+                <svg
+                  className="fill-current h-4 w-4"
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 20 20"
+                >
+                  <path d="M9.293 12.95l.707.707L15.657 8l-1.414-1.414L10 10.828 5.757 6.586 4.343 8z"></path>
+                </svg>
+              </div>
+            </div>
+          </div>
+        </div>
+        <button type="submit" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
+              Adres & betalen 
+            </button>
+      </form>
+
+      {/* <form className="w-full max-w-lg" onSubmit={handleSubmit}>
   <div className="flex flex-wrap -mx-3 mb-6">
     <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
       <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
@@ -324,34 +318,43 @@ const CheckoutForm = () => {
         {isProccessing ? "Verwerken van bestelling" : `Betaal`}
       </button>
       </div>
-    </form>
-    
+    </form> */}
     </>
-    
-  )
-}
-
+  );
+};
 
 const OrderPage: NextPage = () => {
 
-  const [user] = ['5211']
-  const router = useRouter()
-
   return (
     <>
-    <NavBarLogo />
-    <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
-        <h2 className="font-bold uppercase">Afrekenen</h2>
-
-        <Elements stripe={getStripe()}>
+      <NavBarLogo />
+      <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
+        <h2 className="font-bold uppercase">Bezorging</h2>
           <CheckoutForm />
-        </Elements>
         <div className="flex items-center mt-4 text-green-800">
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" className="flex-shrink-0 w-5 h-5"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"></path></svg>
-          <p className="ml-3 text-xs">Alle transacties gaan via <abbr title="Grootste en veiligste betaalplatform">Stripe</abbr> betaalplatform.</p></div>
+          <svg
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke="currentColor"
+            className="flex-shrink-0 w-5 h-5"
+          >
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"
+            ></path>
+          </svg>
+          <p className="ml-3 text-xs">
+            Alle transacties gaan via{" "}
+            <abbr title="Grootste en veiligste betaalplatform">Stripe</abbr>{" "}
+            betaalplatform.
+          </p>
+        </div>
       </div>
     </>
-  )
-}
+  );
+};
 
-export default OrderPage
+export default OrderPage;

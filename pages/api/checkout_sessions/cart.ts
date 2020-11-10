@@ -32,7 +32,7 @@ export default async function handler(
     
   // }
 
-  if (req.method === 'POST') {
+  // if (req.method === 'POST') {
     
     try {
       // Validate the cart details that were sent from the client.
@@ -52,8 +52,9 @@ export default async function handler(
         success_url: `${req.headers.origin}/result?session_id={CHECKOUT_SESSION_ID}`,
         cancel_url: `${req.headers.origin}/winkelwagentje`,
         metadata: {
-          pickup: meta.pickup,
-          time: meta.time
+          pickup: meta.location,
+          time: meta.time,
+          day: meta.day
         },
         locale: 'auto',
         
@@ -69,8 +70,8 @@ export default async function handler(
     } catch (err) {
       res.status(500).json({ statusCode: 500, message: err.message })
     }
-  } else {
-    res.setHeader('Allow', 'POST')
-    res.status(405).end('Method Not Allowed')
-  }
+  // } else {
+  //   res.setHeader('Allow', 'POST')
+  //   res.status(405).end('Method Not Allowed')
+  // }
 }

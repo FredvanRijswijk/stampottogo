@@ -11,6 +11,8 @@ import useSWR from 'swr'
 
 import { useState, useEffect } from "react"
 import Navbar from '@/components/Navbar'
+import Link from 'next/link'
+import NavBarLogo from '@/components/NavBarLogo'
 
 const ResultPage: NextPage = () => {
   const router = useRouter()
@@ -39,15 +41,20 @@ const ResultPage: NextPage = () => {
   return (
       
       <>
-      <Navbar />
+      
       <div className="flex flex-col mx-auto max-w-lg w-full col-auto">
-        <h1>Checkout Payment Result</h1>
+        <NavBarLogo />
+        <h1>Bedankt</h1>
+        <Link href="/">
+        <a href="/">terug naar website</a>
+      </Link>
         <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2>
         <h3>CheckoutSession response:</h3>
         <PrintObject content={data ?? 'loading...'} />
-        <Cart>
+        {data?.payment_intent?.customer}
+        
           <ClearCart />
-        </Cart>
+        
       </div>
 </>
   )

@@ -1,4 +1,5 @@
 import { NextApiRequest, NextApiResponse } from 'next'
+import { validateCartItems } from 'use-shopping-cart/src/serverUtil'
 
 import Stripe from 'stripe'
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
@@ -6,25 +7,20 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: '2020-08-27',
 })
 
-export default async (
+export default async function handler(
   req: NextApiRequest,
-  res: NextApiResponse) => {
+  res: NextApiResponse
+) {
 
   const myDishes = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
 
   // pay
-  if (req.method === 'POST') {
-    const data = req.body
-    console.log('BODY: ', req.body);
     try {
+      // res.status(200).send(req.body);
       const payment = await stripe.paymentIntents.create({
-        amount: data.amount,
-        payment_method_types: ['ideal', 'card'],
+        amount: req.body.totalPrice,
         currency: 'eur',
-        receipt_email: data.email,
-        metadata: {
-          order_id: '451151'
-        },
+        payment_method_types: ['ideal']
 
       })
 
@@ -36,8 +32,5 @@ export default async (
       console.error(error)
       return res.status(error.status || 500).end(error.message)
     }
-  } else {
-    res.setHeader('Allow', 'POST')
-    res.status(405).end('Method Not Allowed')
-  }
+
 }
