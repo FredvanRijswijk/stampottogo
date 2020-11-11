@@ -3,7 +3,7 @@ import Cors from 'micro-cors'
 import { NextApiRequest, NextApiResponse } from 'next'
 import { IncomingWebhook } from '@slack/webhook'
 
-import admin from 'firebase-admin';
+import admin, { firestore } from 'firebase-admin';
 
 if (!admin.apps.length) {
   admin.initializeApp({
@@ -63,16 +63,19 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
 
     if (event.type === 'checkout.session.completed') {
       const p = event.data.object as Stripe.PaymentIntent;
-        console.log('yfghfgh fgf gfg fgfh',p);
+        // console.log('yfghfgh fgf gfg fgfh',p);
 
         console.log(p.shipping.address);
-        console.log(p.metadata.pickup);
+        console.log(p.amount_total);
 
         const data = {
           address: p.shipping.address,
           location: p.metadata.pickup,
           time: p.metadata.time,
+          day: firestore.Timestamp.fromDate(new Date(p.metadata.day)),
+          phone: p.metadata.phone,
           customer: p.customer,
+          amount: p.amount_total,
         }
         
         

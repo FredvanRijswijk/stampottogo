@@ -54,7 +54,8 @@ export default async function handler(
         metadata: {
           pickup: meta.location,
           time: meta.time,
-          day: meta.day
+          day: meta.day,
+          phone: meta.phone
         },
         locale: 'auto',
         

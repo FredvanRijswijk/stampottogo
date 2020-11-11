@@ -53,6 +53,9 @@ const CheckoutForm = () => {
   const tomorrow = addDays(new Date(), 1)
 
   const optionsDate = [
+    <option key={'Wanneer'} value={''}>
+      {'Wanneer?'}
+    </option>,
     <option key={'vandaag'} value={today.toDateString()}>
       {'vandaag'}
     </option>,
@@ -62,6 +65,9 @@ const CheckoutForm = () => {
   ]
   
   const optionsTime = [
+    <option key={'Hoe laat'} value={''}>
+      {'Hoe laat?'}
+    </option>,
     <option key={'16:00'} value='16:00'>
       {'16:00 - 16:30'}
     </option>,
@@ -169,6 +175,7 @@ const CheckoutForm = () => {
               <select
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
                 id="quantity-select"
+                required
                 defaultValue={day}
                 onChange={(event) => {setDay(event.target.value)}}
               >
@@ -194,6 +201,7 @@ const CheckoutForm = () => {
             <div className="relative">
               <select
                 className="block appearance-none w-full bg-gray-200 border border-gray-200 text-gray-700 py-3 px-4 pr-8 rounded leading-tight focus:outline-none focus:bg-white focus:border-gray-500"
+                required
                 id="quantity-select"
                 defaultValue={time}
                 onChange={(event) => {setTime(event.target.value)}}
