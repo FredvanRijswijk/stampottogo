@@ -83,7 +83,7 @@ const CartSummaryShort = () => {
       <div className="flex flex-col w-full mx-auto p-8 text-gray-800 bg-white shadow-lg pin-r pin-y">
         <div className="flex-2">
           <h2 className="font-semibold uppercase text-center" suppressHydrationWarning>
-            Wat?
+            Bon
           </h2>
           <table className="w-full text-sm lg:text-base">
             <thead>

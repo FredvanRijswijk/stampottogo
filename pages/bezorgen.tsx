@@ -93,6 +93,7 @@ const CheckoutForm = () => {
   const { user } = useAuth();
   const [time, setTime] = useState('');
   const [day, setDay] = useState('');
+  const [phone, setPhone] = useState('');
   const [errorMessage, setErrorMessage] = useState(null);
   const [paymentMethod, setPaymentMethod] = useState(null);
   const [paymentStatus, setPaymentStatus] = useState(null);
@@ -121,7 +122,8 @@ const CheckoutForm = () => {
       location: "ce",
       time: time,
       day: day,
-      uid: user.uid
+      uid: user.uid,
+      phone: phone
     };
 
     const cartData = JSON.stringify(cartDetails);
@@ -208,6 +210,19 @@ const CheckoutForm = () => {
                 </svg>
               </div>
             </div>
+            <div className="relative">
+      <label className="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" htmlFor="grid-first-name">
+        Telefoon
+      </label>
+      <input className="appearance-none block w-full bg-gray-200 text-gray-700 border border-gray-200 rounded py-3 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" type="text" id="phone"
+        required
+        placeholder="061241212"
+        value={phone}
+        onChange={(e) => {
+          setPhone(e.target.value);
+        }} />
+  
+    </div>
           </div>
         </div>
         <button type="submit" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out">
