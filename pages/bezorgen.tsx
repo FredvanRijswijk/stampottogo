@@ -385,7 +385,7 @@ const OrderPage: NextPage = () => {
         <h2 className="font-bold uppercase">Bezorging</h2>
         <div className="flex items-center mt-4 text-red-800">
         <p className="ml-3 text-xs">
-            Bezorging alleen in 's-Hertogenbosch, Vught en Rosmalen
+            LET OP! Bezorging alleen in 's-Hertogenbosch, Vught en Rosmalen
           </p>
           </div>
           <CheckoutForm />
