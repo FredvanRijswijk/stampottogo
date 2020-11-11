@@ -66,7 +66,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
         // console.log('yfghfgh fgf gfg fgfh',p);
 
         console.log(p.shipping.address);
-        console.log(p.amount_total);
+        // console.log(p.amount_total);
 
         const data = {
           address: p.shipping.address,
@@ -75,7 +75,7 @@ const webhookHandler = async (req: NextApiRequest, res: NextApiResponse) => {
           day: firestore.Timestamp.fromDate(new Date(p.metadata.day)),
           phone: p.metadata.phone,
           customer: p.customer,
-          amount: p.amount_total,
+          // amount: p.amount_total,
         }
         
         
