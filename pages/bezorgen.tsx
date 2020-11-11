@@ -383,6 +383,11 @@ const OrderPage: NextPage = () => {
       <div className="text-center font-light px-4 py-2 m-2 hidden lg:block"><Link href="/winkelwagentje">* Terug naar winkelwagentje</Link></div>
       <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
         <h2 className="font-bold uppercase">Bezorging</h2>
+        <div className="flex items-center mt-4 text-red-800">
+        <p className="ml-3 text-xs">
+            Bezorging alleen in 's-Hertogenbosch, Vught en Rosmalen
+          </p>
+          </div>
           <CheckoutForm />
         <div className="flex items-center mt-4 text-green-800">
           <svg
