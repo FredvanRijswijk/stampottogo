@@ -23,6 +23,8 @@ import { useRouter } from "next/router";
 import NavBarLogo from "@/components/NavBarLogo";
 import StripeTestCards from "@/components/StripeTestCards";
 import Link from "next/link";
+import CartSummaryShort from "@/components/CartSummaryShort";
+import Head from "next/head";
 
 const ELEMENT_OPTIONS = {
   classes: {
@@ -150,6 +152,8 @@ const CheckoutForm = () => {
 
   return (
     <>
+    <div className="grid grid-cols-2">
+      <div>
       <form className="w-full max-w-lg" onSubmit={handleCheckout}>
         <div className="flex flex-wrap -mx-3 mb-6">
           <div className="w-full md:w-1/2 px-3 mb-6 md:mb-0">
@@ -210,6 +214,16 @@ const CheckoutForm = () => {
               Adres & betalen 
             </button>
       </form>
+
+      </div>
+
+
+      <div>
+
+      <CartSummaryShort />
+
+      </div>
+      </div>
 
       {/* <form className="w-full max-w-lg" onSubmit={handleSubmit}>
   <div className="flex flex-wrap -mx-3 mb-6">
@@ -329,6 +343,19 @@ const OrderPage: NextPage = () => {
 
   return (
     <>
+    <Head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              window.dataLayer.push({
+                'event': 'Pageview',
+                'pagePath': '/bezorgen',
+                'pageTitle': 'Bezorgen STAMPPOT to go'
+              });`,
+          }}
+        ></script>
+      </Head>
       <NavBarLogo />
       <div className="text-center font-light px-4 py-2 m-2 hidden lg:block"><Link href="/winkelwagentje">* Terug naar winkelwagentje</Link></div>
       <div className="flex flex-col max-w-lg w-full justify-center items-center mx-auto">
