@@ -1,2 +1,4 @@
 User-agent: *
-Disallow: /
+Allow: /
+Disallow: /winkelwagentje/
+Disallow: /bezorgen/
