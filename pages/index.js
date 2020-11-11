@@ -40,7 +40,7 @@ const HomePage = ({ posts }) => {
       </Head>
       <NextSeo
         title='STAMPPOT to go'
-        description='Lokaal af te halen en binnenkort in heel Nederland te bestellen'
+        description='ism de OetelApp heerlijke luxe stamppot'
         canonical={`https://www.stamppottogo.nl/`}
       />
       <HeaderBanner title="Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="Stamppotten & Snert" />
