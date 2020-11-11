@@ -87,6 +87,7 @@ const HomePage = ({ posts }) => {
                 currency: post.currency,
                 language: 'nl-NL'
               })}</div>
+              
             </div>
             <div suppressHydrationWarning className="mt-2 leading-tight">
               {post.description}
