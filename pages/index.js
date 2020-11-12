@@ -10,6 +10,7 @@ import { useShoppingCart, formatCurrencyString } from 'use-shopping-cart'
 import ProductImageView from '../components/ProductImageView'
 // import { Box, Link, Text, Card } from 'theme-ui'
 import { toast, ToastContainer } from '../components/Toast'
+import Link from "next/link";
 
 const HomePage = ({ posts }) => {
   // const { meta_title = "STAMPPOT to go", meta_description = "Lokaal af te halen en binnenkort in heel Nederland te bestellen" };
@@ -57,7 +58,8 @@ const HomePage = ({ posts }) => {
                 Uit de keuken van Brasserie Cé - STAMPPOT to go{" "}
               </h1>
               <p>
-              Tijdens deze 2e lockdown voor de horeca en het koudere seizoen hebben we STAMPPOT to go opgezet. In samenwerking met Brasserie Cé kunt u thuis genieten van de lekkerste stamppotten en andere winterse gerechten, zonder dat u zelf uw spierballen hoeft te gebruiken. U kunt kiezen uit zowel afhalen als thuisbezorgen.
+              Tijdens deze 2e lockdown voor de horeca en het koudere seizoen hebben we STAMPPOT to go opgezet. 
+              In samenwerking met <Link href="https://ce-denbosch.nl/"> Brasserie Cé</Link> kunt u thuis genieten van de lekkerste stamppotten en andere winterse gerechten, zonder dat u zelf uw spierballen hoeft te gebruiken. U kunt kiezen uit zowel afhalen als thuisbezorgen.
               </p>
             </div>
           </div>
@@ -93,7 +95,7 @@ const HomePage = ({ posts }) => {
               {post.description}
             </div>
             <div className="mt-4">
-            <button className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
+            <button id="addToCart" className="inline-flex items-center justify-center px-5 py-3 border border-transparent text-base leading-6 font-medium square-md text-white bg-gray-900 hover:bg-gray-500 focus:outline-none focus:shadow-outline transition duration-150 ease-in-out"
               onClick={() => addNotify(post)}
             >
               Bestel
