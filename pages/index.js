@@ -40,10 +40,10 @@ const HomePage = ({ posts }) => {
       </Head>
       <NextSeo
         title='STAMPPOT to go'
-        description='ism de OetelApp heerlijke luxe stamppot'
+        description='Verse heerlijke luxe stamppot'
         canonical={`https://www.stamppottogo.nl/`}
       />
-      <HeaderBanner title="Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="Stamppotten & Snert" />
+      {/* <HeaderBanner title="Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep" title_small="Stamppotten & Snert" /> */}
 
       <>
         
@@ -54,10 +54,10 @@ const HomePage = ({ posts }) => {
             <div className="flex-1 text-center">
               <h1 className="font-semibold text-2xl p-8">
                 {" "}
-                Uit de keuken van Het Zomerpaleis STAMPPOT to go{" "}
+                Uit de keuken van Brasserie Cé - STAMPPOT to go{" "}
               </h1>
               <p>
-              Tijdens deze 2e lockdown voor de horeca willen we toch een stukje Oeteldonk in huis brengen. Uit de keuken van Het Zomerpaleis kun je thuis genieten van de lekkerste stamppotten en erwtensoep. Zo kun je toch genieten van je jaarlijkse 11-11 gerecht zonder zelf je spierballen te hoeven gebruiken.
+              Tijdens deze 2e lockdown voor de horeca en het koudere seizoen hebben we STAMPPOT to go opgezet. In samenwerking met Brasserie Cé kunt u thuis genieten van de lekkerste stamppotten en andere winterse gerechten, zonder dat u zelf uw spierballen hoeft te gebruiken. U kunt kiezen uit zowel afhalen als thuisbezorgen.
               </p>
             </div>
           </div>
@@ -87,7 +87,7 @@ const HomePage = ({ posts }) => {
                 currency: post.currency,
                 language: 'nl-NL'
               })}</div>
-              
+
             </div>
             <div suppressHydrationWarning className="mt-2 leading-tight">
               {post.description}

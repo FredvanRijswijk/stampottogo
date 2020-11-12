@@ -12,7 +12,7 @@ const NavBarLogo = () => {
               <div className="flex justify-center m-6 lg:hidden ">
               <Link href="/">
                 <Image
-                  src="/static/images/oeteldonk.jpg"
+                  src="/static/images/no-picture.jpg"
                   width="80"
                   height="80"
                 />
@@ -21,7 +21,7 @@ const NavBarLogo = () => {
 
               <div className="hidden lg:flex justify-center m-6 ">
                 <Image
-                  src="/static/images/oeteldonk.jpg"
+                  src="/static/images/no-picture.jpg"
                   width="160"
                   height="160"
                 />
