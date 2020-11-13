@@ -17,11 +17,59 @@ const HomePage = ({ posts }) => {
   const { addItem } = useShoppingCart()
   // console.log(posts);
 
+  const data = posts.dishes.map((item) => (
+    {
+      item_name: item.name, // Name or ID is required.
+      item_id: item.sku,
+      price: item.price / 100,
+      item_brand: "STAMPPOT to go",
+      item_category: item.category,
+      item_list_name: "Homepage",
+      quantity: 1,
+    })
+  )
+
+  // console.log(data);
+
+  useEffect(() => {
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "view_item_list",
+      ecommerce: {
+        currencyCode: 'EUR',
+        items: data
+      },
+    });
+  }) 
+
+  
+
+
+
 
   function addNotify(item) {
     // console.log(item);
-    addItem(item)
-    toast.notify(`We hebben ${item.name} toegevoegd`)
+    addItem(item);
+    toast.notify(`We hebben ${item.name} toegevoegd`);
+    window.dataLayer.push({
+      event: "add_to_cart",
+      ecommerce: {
+        currencyCode: 'EUR',
+        items: [
+          {
+            item_name: item.name, // Name or ID is required.
+            item_id: item.sku,
+            price: item.price / 100,
+            item_brand: "STAMPPOT to go",
+            item_category: item.category,
+            item_list_name: "Homepage",
+            item_list_id: "SR123",
+            index: 1,
+            quantity: 1,
+          },
+        ],
+      },
+    });
   }
   
   return (
@@ -68,8 +116,7 @@ const HomePage = ({ posts }) => {
 
           
         {posts.dishes.map((post) => (
-          
-          
+ 
           <div key={post.id} className="px-2 py-2 m-8 sm:m-1">
           <div className="bg-white border rounded-lg overflow-hidden">
             
