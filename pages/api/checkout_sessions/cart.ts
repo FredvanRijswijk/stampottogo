@@ -25,7 +25,7 @@ export default async function handler(
 
   const data  = await fetch(`${process.env.NEXT_BASE_URL}/api/dishes`).then((res) => res.json())
 
-  console.log('req.body ', req.body);
+  // console.log('req.body ', req.body);
   
   // if (data.dishes) {
   //   console.log('DATA Dishes', data.dishes);

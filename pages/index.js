@@ -25,6 +25,7 @@ const HomePage = ({ posts }) => {
       item_brand: "STAMPPOT to go",
       item_category: item.category,
       item_list_name: "Homepage",
+      item_list_id: "H1",
       quantity: 1,
     })
   )
@@ -36,7 +37,6 @@ const HomePage = ({ posts }) => {
     window.dataLayer.push({
       event: "view_item_list",
       ecommerce: {
-        currencyCode: 'EUR',
         items: data
       },
     });

@@ -26,6 +26,11 @@ import Link from "next/link";
 import CartSummaryShort from "@/components/CartSummaryShort";
 import Head from "next/head";
 
+// Declare gTM dataLayer array.
+declare global {
+  interface Window { dataLayer: any[]; }
+}
+
 const ELEMENT_OPTIONS = {
   classes: {
     base: "StripeElementIdeal",
@@ -48,6 +53,8 @@ const ELEMENT_OPTIONS = {
 };
 
 const CheckoutForm = () => {
+
+
 
   const today = new Date()
   const tomorrow = addDays(new Date(), 1)
@@ -132,14 +139,30 @@ const CheckoutForm = () => {
       phone: phone
     };
 
-    const cartData = JSON.stringify(cartDetails);
+    const items = Object.keys(cartDetails).map((item) => ({
+      item_name: cartDetails[item].name, // Name or ID is required.
+      item_id: cartDetails[item].sku,
+      price: cartDetails[item].price/100,
+      quantity: cartDetails[item].quantity
+    }))
+
+    console.log(items);
+    
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      'event': 'begin_checkout',
+      'ecommerce': {
+        items: items
+      }
+    });
+
 
     const mergedata = {
       cartDetails,
       ...delivery,
     };
 
-    console.log("MERGEDATA: :::: ", mergedata);
+    // console.log("MERGEDATA: :::: ", mergedata);
 
     const response = await fetchPostJSON(
       "/api/checkout_sessions/cart",
@@ -152,6 +175,8 @@ const CheckoutForm = () => {
       console.error(response.message);
       return;
     }
+
+      
 
     redirectToCheckout({ sessionId: response.id });
   };

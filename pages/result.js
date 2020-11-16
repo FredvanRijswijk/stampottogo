@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from "react";
 import { NextPage } from 'next'
 import { useRouter } from 'next/router'
 
@@ -9,26 +10,19 @@ import ClearCart from '../components/ClearCart'
 import { fetchGetJSON } from '../utils/api-helpers'
 import useSWR from 'swr'
 
-import { useState, useEffect } from "react"
+
 import Navbar from '@/components/Navbar'
 import Link from 'next/link'
 import NavBarLogo from '@/components/NavBarLogo'
 import { useAuth } from "@/lib/auth";
 
 
-const ResultPage: NextPage = () => {
+const ResultPage = () => {
   const router = useRouter()
   const { user } = useAuth();
 
   const [width, setWidth] = useState(0);
   const [height, setHeight] = useState(0);
-
-  useEffect(() => {
-    setTimeout(() => {
-      setWidth(window.innerWidth);
-      setHeight(window.innerHeight);
-    }, 100);
-  });
 
   // Fetch CheckoutSession from static page via
   // https://nextjs.org/docs/basic-features/data-fetching#static-generation
@@ -39,8 +33,27 @@ const ResultPage: NextPage = () => {
     fetchGetJSON
   )
 
+  console.log(data?.payment_intent);
 
   if (error) return <div>failed to load</div>
+
+
+    useEffect(() => {
+      window.dataLayer = window.dataLayer || [];
+      window.dataLayer.push({
+        'event': 'purchase',
+        'ecommerce': {
+          'purchase': {
+            'transaction_id': data?.payment_intent.id,
+            'value': data?.payment_intent.charges.data[0].amount/100,
+            'tax': (data?.payment_intent.charges.data[0].amount/100)/100*9,
+            'shipping': 2.95,
+            'currency': 'EUR',
+            
+          }
+        }
+      })
+    })
 
 
   if (user) {
@@ -58,7 +71,7 @@ const ResultPage: NextPage = () => {
         {/* <h2>Status: {data?.payment_intent?.status ?? 'loading...'}</h2> */}
         {/* <h3>CheckoutSession response:</h3> */}
         {/* <PrintObject content={data ?? 'loading...'} /> */}
-        {/* {data?.payment_intent?.customer} */}
+        {data?.payment_intent?.charges.data[0].receipt_number}
         
           <ClearCart />
         
