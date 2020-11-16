@@ -50,7 +50,8 @@ const ResultPage = () => {
             'shipping': 2.95,
             'currency': 'EUR',
             
-          }
+          },
+          'payment_method': data?.payment_intent.charges.data[0].payment_method_details.type,
         }
       })
     })
