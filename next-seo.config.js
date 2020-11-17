@@ -6,13 +6,13 @@ export default {
       site_name: 'STAMPPOT to go',
       images: [
         {
-          url: 'https://www.stamppottogo.nl/static/images/oeteldonk.jpg',
+          url: 'https://www.stamppottogo.nl/static/images/no-picture.jpg',
           width: 1200,
           height: 630,
           alt: 'STAMPPOT to go',
         },
         {
-          url: 'https://www.stamppottogo.nl/static/images/oeteldonk.jpg',
+          url: 'https://www.stamppottogo.nl/static/images/no-picture.jpg',
           width: 512,
           height: 512,
           alt: 'STAMPPOT to go',
