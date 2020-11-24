@@ -7,9 +7,9 @@ module.exports = {
   theme: {
     extend: {
       colors: {
-        'brandcolor': '#FEDF25',
-        'brandcolor-600': '#FEDF25',
-        'brandcolor-900': '#FEDF25',
+        'brandcolor': '#f4f5f5',
+        'brandcolor-600': '#f4f5f5',
+        'brandcolor-900': '#f4f5f5',
       },
     },
     fontFamily: {

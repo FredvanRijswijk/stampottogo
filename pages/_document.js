@@ -14,7 +14,7 @@ export default class extends Document {
 
   render() {
     return (
-      <Html lang="nl">
+      <Html lang="nl" className="antialiased text-gray-900">
         <Head>
         <script
             dangerouslySetInnerHTML={{
@@ -36,7 +36,7 @@ export default class extends Document {
       }}
     />
         
-          <div className="antialiased text-gray-900">
+          <div >
           <Main />
           <NextScript />
           </div>

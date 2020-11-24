@@ -98,14 +98,14 @@ const HomePage = ({ posts }) => {
         
           <Navbar />
           <ToastContainer />
-          <div className="flex bg-black pb-32 pt-16 pl-8 pr-8">
+          <div className="flex bg-gray-200 pb-32 pt-16 pl-8 pr-8">
             {/* <SliceZone {...props} resolver={resolver} />*/}
             <div className="flex-1 text-center">
-              <h1 className="font-semibold text-white text-2xl p-8">
+              <h1 className="font-semibold text-2xl p-8">
                 {" "}
                 Uit de keuken van Brasserie Cé - STAMPPOT to go{" "}
               </h1>
-              <p className="text-white font-normal">
+              <p className="font-normal">
               Tijdens deze 2e lockdown voor de horeca en het koudere seizoen hebben we STAMPPOT to go opgezet. 
               In samenwerking met <Link href="https://ce-denbosch.nl/"> Brasserie Cé</Link> kunt u thuis genieten van de lekkerste stamppotten en andere winterse gerechten, zonder dat u zelf uw spierballen hoeft te gebruiken. U kunt kiezen uit zowel afhalen als thuisbezorgen.
               </p>
