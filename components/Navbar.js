@@ -41,6 +41,7 @@ const Navbar = () => {
               <CartNavBar />
             </div>
           </nav>
+          <div className="bg-red-700 text-4xl text-yellow-50 mx-4 my-4 px-9 py-9 text-center"> ===== Wij zijn op dit moment gesloten! ===== </div> 
     </header>
     </>
   )
